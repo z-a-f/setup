@@ -224,4 +224,5 @@ fi
 ## ------------------------------
 
 ## Define any user-specific variables you want here.
+source ~/.bash_colors
 source ~/.bashrc_custom
