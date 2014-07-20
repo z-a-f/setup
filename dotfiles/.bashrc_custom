@@ -7,17 +7,18 @@ export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # Change the aliases:
+alias cp='cp -rv'
 alias ls='ls -GFh'
 alias ll='ls -GFhal'
 alias rm='rm -vi'
 alias mkdir='mkdir -pv'
 
 # Custom functions:
-githubInit() {
-  curl -u '$1' https://api/github.com/user/repos -d '{"name":"$2"}'
-  git remote add origin git@github.com:$1/$2.git
-  git push origin master
-}     # Create GITHUB repo from terminal
+#githubInit() {
+#  curl -u '$1' https://api/github.com/user/repos -d '{"name":"$2"}'
+#  git remote add origin git@github.com:$1/$2.git
+#  git push origin master
+#}     # Create GITHUB repo from terminal
 
 # mans() { man $1 | grep -iC2 --color=always $2 | less }		# Search in MANPAGE
 mcd() { mkdir -pv "$1" && cd "$1"; }		# Make directory and cd there
