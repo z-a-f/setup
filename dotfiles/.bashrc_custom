@@ -27,3 +27,4 @@ mcd() { mkdir -pv "$1" && cd "$1"; }		# Make directory and cd there
 ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
 rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
+
