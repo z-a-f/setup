@@ -1,3 +1,5 @@
+# More paths:
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 # Change the prompt:
 export PS1="\[${Color_Off}${BICyan}\u${White}@${Purple}\h${White}:${BIYellow}\W${Color_Off}\] \$ "
