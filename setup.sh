@@ -1,4 +1,5 @@
 
+
 SETUPDIR=`pwd` 
 cd ${HOME}
 if [ -d ./dotfiles/ ]; then
