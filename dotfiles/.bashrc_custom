@@ -12,8 +12,10 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 alias cp='cp -rv'
 alias ls='ls -GFh'
 alias ll='ls -GFhal'
-alias rm='rm -vi'
 alias mkdir='mkdir -pv'
+alias rm='rm -vi'
+alias valgrind='valgrind --leak-check=full --show-leak-kinds=all --tool=memcheck'
+
 
 # Custom functions:
 #githubInit() {
