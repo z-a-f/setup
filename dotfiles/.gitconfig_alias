@@ -109,6 +109,8 @@
 	s = status
 	sb = status -s -b
 	#############
+	send  = !git add . && git commit -m "\"AUTOCOMMIT: $(date)\"" && git push
+	#############
 	sa = stash apply
 	sc = stash clear
 	sd = stash drop
