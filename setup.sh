@@ -12,12 +12,14 @@ read cancel
 SETUPDIR=`pwd`
 cd ${HOME}
 if [ -d ./dotfiles/ ]; then
-    mv dotfiles dotfiles.old
+    mv -f dotfiles dotfiles.old
 fi
 if [ -d .emacs.d/ ]; then
     mv .emacs.d .emacs.d~
 fi
-
+if [ -l .emacs.d ]; then
+    rm .emacs.d
+fi
 
 rm -v ${HOME}/.screenrc
 rm -v ${HOME}/.bash_profile
@@ -29,8 +31,7 @@ ln -sv	${SETUPDIR}/dotfiles/.bash_colors	${HOME}/.bash_colors
 ln -sv	${SETUPDIR}/dotfiles/.bash_profile	${HOME}/.bash_profile
 ln -sv	${SETUPDIR}/dotfiles/.bashrc		${HOME}/.bashrc
 ln -sv	${SETUPDIR}/dotfiles/.bashrc_custom	${HOME}/.bashrc_custom
-ln -svf	${SETUPDIR}/dotfiles/.emacs.d		${HOME}/.emacs.d
-
+ln -sv	${SETUPDIR}/dotfiles/.emacs.d		${HOME}/.emacs.d
 
 # GIT:
 if [-d ${HOME}/.git.OLD/ ]; then
@@ -39,7 +40,7 @@ fi
 mkdir ${HOME}/.git.OLD
 
 # move .gitignore:
-mv -v ${HOME}/.gitignore ${HOME}/.git.OLD/
+mv -fv ${HOME}/.gitignore ${HOME}/.git.OLD/
 ln -sv	${SETUPDIR}/dotfiles/.gitignore		${HOME}/.gitignore
 
 # create .gitconfig:
