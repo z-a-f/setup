@@ -23,10 +23,8 @@ fi
 if [ -d .emacs.d/ ]; then
     mv .emacs.d .emacs.d~
 fi
-if [ -l .emacs.d ]; then
-    rm .emacs.d
-fi
 
+rm -v ${HOME}/.emacs.d
 rm -v ${HOME}/.screenrc
 rm -v ${HOME}/.bash_profile
 rm -v ${HOME}/.bashrc*
@@ -47,7 +45,7 @@ fi
 
 
 # GIT:
-if [-d ${HOME}/.git.OLD/ ]; then
+if [ -d ${HOME}/.git.OLD/ ]; then
     rm -rfv ${HOME}/.git.OLD
 fi
 mkdir ${HOME}/.git.OLD
@@ -72,7 +70,8 @@ GITUSER="[user]
 if [ ! -f ${HOME}/.gitconfig_user ]; then
     echo -e "${GITUSER}" > ${HOME}/.gitconfig_user
 else
-    echo -e ".gitconfig_user exists!\n"
+    echo -e ".gitconfig_user exists!\n" # Don't everwrite the USER info - might have tokens
+
 fi
 
 # Install NANO colors:
