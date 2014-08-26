@@ -1,10 +1,12 @@
 ;; -*- mode: emacs-lisp -*-
-;; Simple .emacs configuration
+;; Zafar Takhirov Configuration
 
 ;; ---------------------
 ;; -- Global Settings --
 ;; ---------------------
-(add-to-list 'load-path "~/.emacs.d")
+;; (add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/.elisp")
+(add-to-list 'load-path "~/.emacs.d/.escript")
 (require 'cl)
 (require 'ido)
 (require 'ffap)
@@ -41,16 +43,26 @@
  '(fundamental-mode-default ((t (:inherit default))) t)
  '(highlight ((((class color) (min-colors 8)) (:background "white" :foreground "magenta"))))
  '(isearch ((((class color) (min-colors 8)) (:background "yellow" :foreground "black"))))
- '(linum ((t (:foreground "black" :weight bold))))
+ '(linum ((t (:background "white" :foreground "black" :weight bold))))
  '(region ((((class color) (min-colors 8)) (:background "white" :foreground "magenta"))))
  '(secondary-selection ((((class color) (min-colors 8)) (:background "gray" :foreground "cyan"))))
  '(show-paren-match ((((class color) (background light)) (:background "black"))) t)
  '(vertical-border ((t nil))))
 
+;; ---------------
+;; -- Functions --
+;; ---------------
+(defun toggle-comment-on-line()
+  "Comment/Uncomment current line"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+  )
+
 ;; -------------
 ;; -- Globals --
 ;; -------------
 (global-linum-mode 1)
+(global-font-lock-mode 1)
 
 ;; ------------
 ;; -- Macros --
@@ -59,7 +71,8 @@
 (fset 'align-equals "\C-[xalign-regex\C-m=\C-m")
 (global-set-key "\M-=" 'align-equals)
 (global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c;" 'comment-or-uncomment-region)
+(global-set-key (kbd "C-;") 'toggle-comment-on-line);; 'comment-or-uncomment-region)
+;; (global-set-key "\C-c;" 'toggle-comment-on-line);; 'comment-or-uncomment-region)
 (global-set-key "\M-n" 'next5)
 (global-set-key "\M-p" 'prev5)
 (global-set-key "\M-o" 'other-window)
@@ -74,11 +87,61 @@
 ;; -- JS Mode configuration --
 ;; ---------------------------
 (load "js-config.el")
-(add-to-list 'load-path "~/.emacs.d/jade-mode") ;; github.com/brianc/jade-mode
+(add-to-list 'load-path "~/.emacs.d/.elisp/jade-mode") ;; github.com/brianc/jade-mode
 (require 'sws-mode)
-(require 'jade-mode)    
+(require 'jade-mode)
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+;; -----------------
+;; -- MATLAB Mode --
+;; -----------------
+(add-to-list 'load-path "~/.emacs.d/.elisp/matlab-emacs/matlab-emacs")
+(load-library "matlab-load")
+
+;; ------------------
+;; -- Verilog Mode --
+;; ------------------
+(autoload 'verilog-mode "verilog-mode" "Verilog mode" t)
+(add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
+(setq verilog-indent-level             2
+      verilog-indent-level-module      2
+      verilog-indent-level-declaration 2
+      verilog-indent-level-behavioral  2
+      ;; verilog-indent-level-directive   1
+      ;; verilog-case-indent              2
+      ;; verilog-auto-newline             t
+      ;; verilog-auto-indent-on-newline   t
+      ;; verilog-tab-always-indent        t
+      verilog-auto-endcomments         nil
+      ;; verilog-minimum-comment-distance 40
+      ;; verilog-indent-begin-after-if    t
+      verilog-auto-lineup              'all
+      ;; verilog-highlight-p1800-keywords nil
+      ;; verilog-linter                   "my_lint_shell_command"
+      verilog-auto-delete-trailing-whitespace t
+      )
+
+;; ----------------
+;; -- ADICE Mode --
+;; ----------------
+(autoload 'adice-mode "adice-mode" "ADICE mode" t)
+
+;; ---------------------
+;; -- File Extensions --
+;; ---------------------
+(setq auto-mode-alist (cons '("\\.h$". c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.hpp$". c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.c$". c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.cpp$". c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.pde$". c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.v$". verilog-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.vams$". verilog-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.sv$". verilog-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.vg$". verilog-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.veo$". verilog-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.use$". adice-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.setup$". makefile-mode) auto-mode-alist))
 
 
 ;; --------------------

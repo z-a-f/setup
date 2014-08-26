@@ -16,9 +16,15 @@ alias cp='cp -rv'
 alias ls='ls -GFh'
 alias ll='ls -GFhal'
 alias mkdir='mkdir -pv'
+alias nano='nano -c'
 alias rm='rm -vi'
 alias valgrind='valgrind --leak-check=full --show-leak-kinds=all --tool=memcheck'
 
+# If the computer is not Darwin:
+if [ "$(uname)"!="Darwin" ]; then
+    alias ls='ls --color -GFh'
+    alias ll='ls --color -GFhal'
+fi
 
 # Custom functions:
 #githubInit() {
