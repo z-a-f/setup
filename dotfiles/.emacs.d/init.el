@@ -47,6 +47,11 @@
  '(show-paren-match ((((class color) (background light)) (:background "black"))) t)
  '(vertical-border ((t nil))))
 
+;; -------------
+;; -- Globals --
+;; -------------
+(global-linum-mode 1)
+
 ;; ------------
 ;; -- Macros --
 ;; ------------

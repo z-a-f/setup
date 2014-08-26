@@ -69,3 +69,13 @@ cd nanorc
 make install
 echo 'include ~/.nano/syntax/ALL.nanorc' >> ~/.nanorc
 rm -rf ${SETUPDIR}/nanorc
+
+
+### Setup scripts:
+if [ ! -d ${HOME}/bin ]; then
+    echo "Creating directory: ${HOME}/bin/"
+    mkdir ${HOME}/bin
+fi
+
+ln -si	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
+ln -si	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer

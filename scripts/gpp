@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+COMP="c++"
+ARGS=""
+ARGS="${ARGS} -std=c++1y"	# Compiler version
+ARGS="${ARGS} -lm" 			# Attach libraries by default
+ARGS="${ARGS} -ggdb -g -O0"	# Debugging and optimization options
+ARGS="${ARGS} -Wall"		# Warnings and errors
+
+fNameIn=$1
+shift
+fNameOut="${fNameIn%.*}"
+extension="${fNameIn##*.}"
+# If file extension not specified, try finding it:
+if [[ ! -f ${fNameIn} || ${fNameIn}==${extension} ]]; then
+	# try cpp:
+	if [ -f ${fNameOut}.cpp ]; then
+		fNameIn=${fNameOut}.cpp
+	elif [ -f ${fNameOut}.c ]; then
+		fNameIn=${fNameOut}.c
+	else
+		echo "File ${fNameIn} not found"
+		exit
+	fi
+fi
+
+if [ -f ${fNameOut} ]; then
+	rm ${fNameOut}
+fi
+
+# Replace ${fNameIn} with ${1} so that any input parameter would work
+toRun="${COMP}	${ARGS}	${fNameIn}	$@	-o ${fNameOut}"		
+
+{
+	echo ${toRun} 
+	`${toRun}`
+} && {
+	if [[ -f "${fNameOut}" && ! -x "${fNameOut}" ]]; then
+		echo "Adding executable rights to ${fNameOut}..."
+		chmod +x "${fNameOut}"
+	fi
+}
