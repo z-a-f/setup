@@ -13,7 +13,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # Change the aliases:
 alias cp='cp -rv'
-alias ls='ls --color -GFh'
+alias ls='ls -GFh'
 alias ll='ls -GFhal'
 alias mkdir='mkdir -pv'
 alias rm='rm -vi'

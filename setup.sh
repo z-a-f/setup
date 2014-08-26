@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
-WARNINGMSG="
-\t\e[91m!!!WARNING!!!\e[0m\n
-This script is \e[91mDESTRUCTIVE!\e[0m It overwrites\n
-all your previous (dotfile) setup.\n
-Press <Ctrl+C> NOW to cancel..."
+# Define basic colors as a starting point:
+if [ "$(uname)" == "Darwin" ]; then
+    source ./dotfiles/.bash_colors_Darwin
+else
+    source ./dotfiles/.bash_colors_Linux
+fi
+
+WARNINGMSG="\t${BIRed}!!!WARNING!!!${Color_Off}\n
+This script is ${BIRed}DESTRUCTIVE!${Color_Off} It overwrites
+all your previous (dotfile) setup.
+Press ${Cyan}<Ctrl+C>${Color_Off} NOW to cancel..."
 
 echo -e "${WARNINGMSG}"
 read cancel
@@ -27,11 +33,18 @@ rm -v ${HOME}/.bashrc*
 rm -v ${HOME}/.bash_colors
 
 ln -sv	${SETUPDIR}/dotfiles/.screenrc		${HOME}/.screenrc
-ln -sv	${SETUPDIR}/dotfiles/.bash_colors	${HOME}/.bash_colors
 ln -sv	${SETUPDIR}/dotfiles/.bash_profile	${HOME}/.bash_profile
 ln -sv	${SETUPDIR}/dotfiles/.bashrc		${HOME}/.bashrc
 ln -sv	${SETUPDIR}/dotfiles/.bashrc_custom	${HOME}/.bashrc_custom
 ln -sv	${SETUPDIR}/dotfiles/.emacs.d		${HOME}/.emacs.d
+
+# Create color link:
+if [ "$(uname)" == "Darwin" ]; then	# Mac
+    ln -sv	${SETUPDIR}/dotfiles/.bash_colors_Darwin	${HOME}/.bash_colors
+else
+    ln -sv	${SETUPDIR}/dotfiles/.bash_colors_Linux		${HOME}/.bash_colors
+fi
+
 
 # GIT:
 if [-d ${HOME}/.git.OLD/ ]; then
@@ -64,11 +77,13 @@ fi
 
 # Install NANO colors:
 cd ${SETUPDIR}
-git clone https://github.com/nanorc/nanorc.git
+if [ ! -d nanorc ]; then
+    git clone https://github.com/nanorc/nanorc.git
+fi
 cd nanorc
 make install
 echo 'include ~/.nano/syntax/ALL.nanorc' >> ~/.nanorc
-rm -rf ${SETUPDIR}/nanorc
+# rm -rf ${SETUPDIR}/nanorc
 
 
 ### Setup scripts:
