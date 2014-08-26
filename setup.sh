@@ -24,12 +24,12 @@ rm -v ${HOME}/.bash_profile
 rm -v ${HOME}/.bashrc*
 rm -v ${HOME}/.bash_colors
 
-ln -sv 	${SETUPDIR}/dotfiles/.screenrc 		${HOME}/.screenrc
-ln -sv 	${SETUPDIR}/dotfiles/.bash_colors 	${HOME}/.bash_colors
-ln -sv 	${SETUPDIR}/dotfiles/.bash_profile 	${HOME}/.bash_profile
-ln -sv 	${SETUPDIR}/dotfiles/.bashrc 		${HOME}/.bashrc
-ln -sv 	${SETUPDIR}/dotfiles/.bashrc_custom 	${HOME}/.bashrc_custom
-ln -svf	${SETUPDIR}/dotfiles/.emacs.d 		${HOME}/.emacs.d
+ln -sv	${SETUPDIR}/dotfiles/.screenrc		${HOME}/.screenrc
+ln -sv	${SETUPDIR}/dotfiles/.bash_colors	${HOME}/.bash_colors
+ln -sv	${SETUPDIR}/dotfiles/.bash_profile	${HOME}/.bash_profile
+ln -sv	${SETUPDIR}/dotfiles/.bashrc		${HOME}/.bashrc
+ln -sv	${SETUPDIR}/dotfiles/.bashrc_custom	${HOME}/.bashrc_custom
+ln -svf	${SETUPDIR}/dotfiles/.emacs.d		${HOME}/.emacs.d
 
 
 # GIT:
@@ -58,5 +58,13 @@ GITUSER="[user]
 if [ ! -f ${HOME}/.gitconfig_user ]; then
     echo -e "${GITUSER}" > ${HOME}/.gitconfig_user
 else
-	echo -e ".gitconfig_user exists!\n"
+    echo -e ".gitconfig_user exists!\n"
 fi
+
+# Install NANO colors:
+cd ${SETUPDIR}
+git clone https://github.com/nanorc/nanorc.git
+cd nanorc
+make install
+echo 'include ~/.nano/syntax/ALL.nanorc' >> ~/.nanorc
+rm -rf ${SETUPDIR}/nanorc
