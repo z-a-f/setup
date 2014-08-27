@@ -40,6 +40,8 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(column-number-mode t)
+ '(comment-multi-line t)
+ '(comment-style (quote indent))
  '(custom-enabled-themes (quote (deeper-blue)))
  '(font-use-system-font t)
  '(menu-bar-mode nil))
@@ -57,7 +59,7 @@
  '(fundamental-mode-default ((t (:inherit default))) t)
  '(highlight ((((class color) (min-colors 8)) (:background "white" :foreground "magenta"))))
  '(isearch ((((class color) (min-colors 8)) (:background "yellow" :foreground "black"))))
- '(linum ((t (:background "white" :foreground "black" :weight bold))))
+ '(linum ((t (:background "white" :foreground "black" :weight bold :width normal :height 98 :slant normal :family "DejaVu LGC Sans Mono" :foundry "unknown"))))
  '(region ((((class color) (min-colors 8)) (:background "white" :foreground "magenta"))))
  '(secondary-selection ((((class color) (min-colors 8)) (:background "gray" :foreground "cyan"))))
  '(show-paren-match ((((class color) (background light)) (:background "black"))))
@@ -98,6 +100,11 @@
 (global-set-key "\M-u" 'zap-to-char)
 ;; Menu:
 (global-set-key (kbd "s-o") 'menu-bar-open)
+
+;; ________________
+;; -- C/C++ Mode --
+;; ________________
+;; (add-hook 'c++-mode-hook '(lambda () (setq comment-start "/*" comment-end "*/")))
 
 ;; ---------------------------
 ;; -- JS Mode configuration --
@@ -165,7 +172,4 @@
 ;; --------------------
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-
-
 
