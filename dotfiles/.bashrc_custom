@@ -5,7 +5,7 @@ PATH=$PATH:$HOME/.local/bin:$HOME/bin
 PATH=$PATH:/Developer/Simulator/Icarus/bin
 
 # Change the prompt:
-export PS1="[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}] \$ "
+export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\] \$ "
 
 # Setup better colors:
 export CLICOLOR=1
