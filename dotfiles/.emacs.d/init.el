@@ -39,15 +39,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(column-number-mode t)
  '(custom-enabled-themes (quote (deeper-blue)))
-)
+ '(font-use-system-font t)
+ '(menu-bar-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit autoface-default :strike-through nil :underline nil :slant normal :weight normal :height 113 :width normal :family "fixed" :foundry "misc"))))
+ '(default ((t (:inherit autoface-default :strike-through nil :underline nil :slant normal :weight normal :height 98 :width normal :family "DejaVu LGC Sans Mono" :foundry "unknown"))))
  '(column-marker-1 ((t (:background "red"))) t)
  '(diff-added ((t (:foreground "cyan"))) t)
  '(flymake-errline ((((class color) (background light)) (:background "Red"))) t)
