@@ -5,11 +5,12 @@ PATH=$PATH:$HOME/.local/bin:$HOME/bin
 PATH=$PATH:/Developer/Simulator/Icarus/bin
 
 # Change the prompt:
-export PS1="\[${Color_Off}${BICyan}\u${White}@${Purple}\h${White}:${BIYellow}\W${Color_Off}\] \$ "
+export PS1="[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}] \$ "
 
 # Setup better colors:
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
+export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
 
 # Change the aliases:
 alias cp='cp -rv'
