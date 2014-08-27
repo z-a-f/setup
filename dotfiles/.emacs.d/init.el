@@ -35,7 +35,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+<<<<<<< HEAD
  '(default ((t (:inherit autoface-default :strike-through nil :underline nil :slant normal :weight normal :height 98 :width normal :family "DejaVu LGC Sans Mono" :foundry "unknown"))))
+=======
+ '(default ((t (:inherit autoface-default :strike-through nil :underline nil :slant normal :weight normal :height 113 :width normal :family "fixed" :foundry "misc"))))
+>>>>>>> 89fcca3e85295477d6abe6cabc4d7e59c30654e2
  '(column-marker-1 ((t (:background "red"))) t)
  '(diff-added ((t (:foreground "cyan"))) t)
  '(flymake-errline ((((class color) (background light)) (:background "Red"))) t)
@@ -163,6 +167,9 @@
  '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(column-number-mode t)
  '(custom-enabled-themes (quote (deeper-blue)))
+<<<<<<< HEAD
  '(font-use-system-font t)
+=======
+>>>>>>> 89fcca3e85295477d6abe6cabc4d7e59c30654e2
  '(menu-bar-mode nil))
 
