@@ -73,6 +73,13 @@
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position))
   )
+(defun my-menu-bar-open()
+  (interactive)
+  (unless menu-bar-mode
+    (menu-bar-mode 1))
+  (menu-bar-open)
+  (setq menu-bar-mode 42)
+  )
 
 ;; -------------
 ;; -- Globals --
@@ -100,6 +107,7 @@
 (global-set-key "\M-u" 'zap-to-char)
 ;; Menu:
 (global-set-key (kbd "s-o") 'menu-bar-open)
+(global-set-key (kbd "<left-margin><mouse-3>") 'my-menu-bar-open)
 
 ;; ________________
 ;; -- C/C++ Mode --
@@ -173,3 +181,8 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+(add-hook 
+ 'pre-command-hook
+ (lambda()
+   (when (eq menu-bar-mode 42)
+     (menu-bar-mode -1))))
