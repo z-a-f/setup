@@ -3,9 +3,14 @@
 COMP="c++"
 ARGS=""
 ARGS="${ARGS} -std=c++1y"	# Compiler version
-ARGS="${ARGS} -lm" 			# Attach libraries by default
+ARGS="${ARGS} -lm" 		# Attach libraries by default
 ARGS="${ARGS} -ggdb -g -O0"	# Debugging and optimization options
 ARGS="${ARGS} -Wall"		# Warnings and errors
+
+# It is already colored on MAC:
+if [ "$(uname)"!="Darwin" ]; then
+    COMP="color-${COMP}"
+fi
 
 fNameIn=$1
 shift
@@ -29,14 +34,18 @@ if [ -f ${fNameOut} ]; then
 fi
 
 # Replace ${fNameIn} with ${1} so that any input parameter would work
-toRun="${COMP}	${ARGS}	${fNameIn}	$@	-o ${fNameOut}"		
+toRun="${COMP} ${ARGS} ${fNameIn} $@ -o ${fNameOut}"		
 
 {
 	echo ${toRun} 
-	`${toRun}`
+	# `${toRun}`
+	exec ${toRun}
 } && {
 	if [[ -f "${fNameOut}" && ! -x "${fNameOut}" ]]; then
 		echo "Adding executable rights to ${fNameOut}..."
 		chmod +x "${fNameOut}"
 	fi
 }
+
+# which $COMP
+# c++ -std=c++1y -lm -ggdb -g -O0 -Wall ArrayStack.cpp -o ArrayStack

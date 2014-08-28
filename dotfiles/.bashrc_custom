@@ -1,8 +1,10 @@
-# More paths:
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
+# Custom BIN paths:
+PATH=$HOME/bin:$HOME/.local/bin:${PATH}
+# Custom bin paths have to be BEFORE $PATH.
+# We want our scripts to have priority, right?
 
 # Icarus paths:
-PATH=$PATH:/Developer/Simulator/Icarus/bin
+# PATH=$PATH:/Developer/Simulator/Icarus/bin
 
 # Change the prompt:
 export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\] \$ "

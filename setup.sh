@@ -12,11 +12,15 @@ This script is ${BIRed}DESTRUCTIVE!${Color_Off} It overwrites
 all your previous (dotfile) setup.
 Press ${Cyan}<Ctrl+C>${Color_Off} NOW to cancel..."
 
+INFO="\n${BIGreen}*INFO*,${Color_Off}"
+WARN="${BIYellow}*WARN*,${Color_Off}"
+
 echo -e "${WARNINGMSG}"
 read cancel
 
 SETUPDIR=`pwd`
 cd ${HOME}
+echo -e "${INFO} Removing the old dotfiles"
 if [ -d ./dotfiles/ ]; then
     mv -f dotfiles dotfiles.old
 fi
@@ -30,6 +34,7 @@ rm -v ${HOME}/.bash_profile
 rm -v ${HOME}/.bashrc*
 rm -v ${HOME}/.bash_colors
 
+echo -e "${INFO} Creating soft links"
 ln -sv	${SETUPDIR}/dotfiles/.screenrc		${HOME}/.screenrc
 ln -sv	${SETUPDIR}/dotfiles/.bash_profile	${HOME}/.bash_profile
 ln -sv	${SETUPDIR}/dotfiles/.bashrc		${HOME}/.bashrc
@@ -43,8 +48,8 @@ else
     ln -sv	${SETUPDIR}/dotfiles/.bash_colors_Linux		${HOME}/.bash_colors
 fi
 
-
 # GIT:
+echo -e "${INFO} Setting up GIT"
 if [ -d ${HOME}/.git.OLD/ ]; then
     rm -rfv ${HOME}/.git.OLD
 fi
@@ -75,6 +80,7 @@ else
 fi
 
 # Install NANO colors:
+echo -e "${INFO} Setting up NANO"
 cd ${SETUPDIR}
 if [ ! -d nanorc ]; then
     git clone https://github.com/nanorc/nanorc.git
@@ -84,12 +90,25 @@ make install
 echo 'include ~/.nano/syntax/ALL.nanorc' >> ~/.nanorc
 # rm -rf ${SETUPDIR}/nanorc
 
+# Setup COLORGCC:
+echo -e "${INFO} Setting up COLORGCC"
+echo -e "${WARN} Please, check ${HOME}/.colorgccrc"
+echo -e "${WARN} if the paths to compilers are set!"
+ln -svf ${SETUPDIR}/dotfiles/.colorgccrc ${HOME}/.colorgccrc
+ln -svf ${SETUPDIR}/scripts/colorgcc ${HOME}/bin/colorgcc
+ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-g++
+ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-gcc
+ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-c++
+ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-cc
 
 ### Setup scripts:
+echo -e "${INFO} Setting up scripts"
 if [ ! -d ${HOME}/bin ]; then
+    echo -e "${WARN} ${HOME}/bin not found"
     echo "Creating directory: ${HOME}/bin/"
     mkdir ${HOME}/bin
 fi
 
-ln -si	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
-ln -si	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
+ln -svf	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
+ln -svf	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
+
