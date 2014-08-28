@@ -2,9 +2,9 @@
 
 # Define basic colors as a starting point:
 if [ "$(uname)" == "Darwin" ]; then
-    source ./dotfiles/.bash_colors_Darwin
+    source ./dotfiles/bash_colors_Darwin
 else
-    source ./dotfiles/.bash_colors_Linux
+    source ./dotfiles/bash_colors_Linux
 fi
 
 WARNINGMSG="\t${BIRed}!!!WARNING!!!${Color_Off}\n
@@ -35,17 +35,17 @@ rm -v ${HOME}/.bashrc*
 rm -v ${HOME}/.bash_colors
 
 echo -e "${INFO} Creating soft links"
-ln -sv	${SETUPDIR}/dotfiles/.screenrc		${HOME}/.screenrc
-ln -sv	${SETUPDIR}/dotfiles/.bash_profile	${HOME}/.bash_profile
-ln -sv	${SETUPDIR}/dotfiles/.bashrc		${HOME}/.bashrc
-ln -sv	${SETUPDIR}/dotfiles/.bashrc_custom	${HOME}/.bashrc_custom
-ln -sv	${SETUPDIR}/dotfiles/.emacs.d		${HOME}/.emacs.d
+ln -sfv	${SETUPDIR}/dotfiles/screenrc		${HOME}/.screenrc
+ln -sfv	${SETUPDIR}/dotfiles/bash_profile	${HOME}/.bash_profile
+ln -sfv	${SETUPDIR}/dotfiles/bashrc		${HOME}/.bashrc
+ln -sfv	${SETUPDIR}/dotfiles/bashrc_custom	${HOME}/.bashrc_custom
+ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
 
 # Create color link:
 if [ "$(uname)" == "Darwin" ]; then	# Mac
-    ln -sv	${SETUPDIR}/dotfiles/.bash_colors_Darwin	${HOME}/.bash_colors
+    ln -sfv	${SETUPDIR}/dotfiles/bash_colors_Darwin	${HOME}/.bash_colors
 else
-    ln -sv	${SETUPDIR}/dotfiles/.bash_colors_Linux		${HOME}/.bash_colors
+    ln -sfv	${SETUPDIR}/dotfiles/bash_colors_Linux	${HOME}/.bash_colors
 fi
 
 # GIT:
@@ -57,12 +57,12 @@ mkdir ${HOME}/.git.OLD
 
 # move .gitignore:
 mv -fv ${HOME}/.gitignore ${HOME}/.git.OLD/
-ln -sv	${SETUPDIR}/dotfiles/.gitignore		${HOME}/.gitignore
+ln -sv	${SETUPDIR}/dotfiles/gitignore		${HOME}/.gitignore
 
 # create .gitconfig:
 mv -v ${HOME}/.gitconfig ${HOME}/.git.OLD/
 GITCONFIG="[include]
-\tpath = ${SETUPDIR}/dotfiles/.gitconfig"
+\tpath = ${SETUPDIR}/dotfiles/gitconfig"
 echo -e "${GITCONFIG}" > ${HOME}/.gitconfig
 
 # Create GIT user data:
@@ -94,7 +94,7 @@ echo 'include ~/.nano/syntax/ALL.nanorc' >> ~/.nanorc
 echo -e "${INFO} Setting up COLORGCC"
 echo -e "${WARN} Please, check ${HOME}/.colorgccrc"
 echo -e "${WARN} if the paths to compilers are set!"
-ln -svf ${SETUPDIR}/dotfiles/.colorgccrc ${HOME}/.colorgccrc
+ln -svf ${SETUPDIR}/dotfiles/colorgccrc ${HOME}/.colorgccrc
 ln -svf ${SETUPDIR}/scripts/colorgcc ${HOME}/bin/colorgcc
 ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-g++
 ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-gcc
