@@ -18,33 +18,39 @@ fNameOut="${fNameIn%.*}"
 extension="${fNameIn##*.}"
 # If file extension not specified, try finding it:
 if [[ ! -f ${fNameIn} || ${fNameIn}==${extension} ]]; then
-	# try cpp:
-	if [ -f ${fNameOut}.cpp ]; then
-		fNameIn=${fNameOut}.cpp
-	elif [ -f ${fNameOut}.c ]; then
-		fNameIn=${fNameOut}.c
-	else
-		echo "File ${fNameIn} not found"
-		exit
-	fi
+    # try cpp:
+    if [ -f ${fNameOut}.cpp ]; then
+	fNameIn=${fNameOut}.cpp
+    elif [ -f ${fNameOut}.c ]; then
+	fNameIn=${fNameOut}.c
+    elif [ -f .${extension}.cpp ]; then
+	fNameIn=.${extension}.cpp
+	fNameOut="${fNameIn%.*}"
+    elif [ -f .${extension}.c ]; then
+	fNameIn=.${extension}.c
+	fNameOut="${fNameIn%.*}"
+    else
+	echo "File ${fNameIn} not found"
+	exit
+    fi
 fi
 
 if [ -f ${fNameOut} ]; then
-	rm ${fNameOut}
+    rm ${fNameOut}
 fi
 
 # Replace ${fNameIn} with ${1} so that any input parameter would work
 toRun="${COMP} ${ARGS} ${fNameIn} $@ -o ${fNameOut}"		
 
 {
-	echo ${toRun} 
-	# `${toRun}`
-	exec ${toRun}
+    echo ${toRun} 
+    # `${toRun}`
+    exec ${toRun}
 } && {
-	if [[ -f "${fNameOut}" && ! -x "${fNameOut}" ]]; then
-		echo "Adding executable rights to ${fNameOut}..."
-		chmod +x "${fNameOut}"
-	fi
+    if [[ -f "${fNameOut}" && ! -x "${fNameOut}" ]]; then
+	echo "Adding executable rights to ${fNameOut}..."
+	chmod +x "${fNameOut}"
+    fi
 }
 
 # which $COMP
