@@ -80,6 +80,16 @@
   (setq menu-bar-mode 42)
   )
 
+;; -----------
+;; -- Hooks --
+;; -----------
+(add-hook 
+ 'pre-command-hook
+ (lambda()
+   (when (eq menu-bar-mode 42)
+     (menu-bar-mode -1))))
+
+
 ;; -------------
 ;; -- Globals --
 ;; -------------
@@ -173,15 +183,26 @@
 (setq auto-mode-alist (cons '("\\.use$". adice-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.setup$". makefile-mode) auto-mode-alist))
 
-
 ;; --------------------
 ;; -- Fixes and Bugs --
 ;; --------------------
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-(add-hook 
- 'pre-command-hook
- (lambda()
-   (when (eq menu-bar-mode 42)
-     (menu-bar-mode -1))))
+;; ---------------
+;; -- Mac Stuff --
+;; ---------------
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (progn
+    (message "Microsoft Windows") )
+  )
+ ((string-equal system-type "darwin")   ; Mac OS X
+  (progn
+    (message "Mac OS") )
+  )
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (message "Linux") )
+  )
+ )
