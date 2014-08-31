@@ -79,6 +79,7 @@ else
 
 fi
 
+rm ${HOME}/.nanorc
 # Install NANO colors:
 echo -e "${INFO} Setting up NANO"
 cd ${SETUPDIR}
@@ -87,7 +88,7 @@ if [ ! -d nanorc ]; then
 fi
 cd nanorc
 make install
-echo 'include ~/.nano/syntax/ALL.nanorc' >> ~/.nanorc
+echo 'include ~/.nano/syntax/ALL.nanorc' > ~/.nanorc
 # rm -rf ${SETUPDIR}/nanorc
 
 # Setup COLORGCC:

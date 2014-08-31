@@ -43,8 +43,7 @@
  '(comment-multi-line t)
  '(comment-style (quote indent))
  '(custom-enabled-themes (quote (deeper-blue)))
- '(font-use-system-font t)
- '(menu-bar-mode nil))
+ '(font-use-system-font t))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -59,7 +58,7 @@
  '(fundamental-mode-default ((t (:inherit default))) t)
  '(highlight ((((class color) (min-colors 8)) (:background "white" :foreground "magenta"))))
  '(isearch ((((class color) (min-colors 8)) (:background "yellow" :foreground "black"))))
- '(linum ((t (:background "white" :foreground "black" :weight bold :width normal :height 98 :slant normal :family "DejaVu LGC Sans Mono" :foundry "unknown"))))
+ '(linum ((t (:background "black" :foreground "green" :weight bold :width normal :height 98 :slant normal :family "DejaVu LGC Sans Mono" :foundry "unknown"))))
  '(region ((((class color) (min-colors 8)) (:background "white" :foreground "magenta"))))
  '(secondary-selection ((((class color) (min-colors 8)) (:background "gray" :foreground "cyan"))))
  '(show-paren-match ((((class color) (background light)) (:background "black"))))

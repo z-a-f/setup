@@ -10,8 +10,11 @@ PATH=$HOME/bin:$HOME/.local/bin:${PATH}
 export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\] \$ "
 
 # Setup better colors:
+#export CLICOLOR=1
+#export LSCOLORS=ExFxBxDxCxegedabagacad
+
 export CLICOLOR=1
-export LSCOLORS=ExFxBxDxCxegedabagacad
+export LSCOLORS=GxFxCxDxCxegedabagaced
 export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
 
 # Change the aliases:
@@ -23,8 +26,13 @@ alias nano='nano -c'
 alias rm='rm -vi'
 alias valgrind='valgrind --leak-check=full --show-leak-kinds=all --tool=memcheck'
 
+# If the computer is Darwin:
+if [ "$(uname)" == "Darwin" ]; then
+    alias emacsapp='open -a /Applications/MacPorts/Emacs.app'
+fi
+
 # If the computer is not Darwin:
-if [ "$(uname)"!="Darwin" ]; then
+if [ "$(uname)" != "Darwin" ]; then
     alias ls='ls --color -GFh'
     alias ll='ls --color -GFhal'
 fi
@@ -42,3 +50,5 @@ ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
 rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
 
+# Fixes and Bugs:
+LANG=en_US.UTF8
