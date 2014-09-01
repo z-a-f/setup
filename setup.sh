@@ -113,3 +113,4 @@ fi
 ln -svf	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
 ln -svf	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
 
+ln -svf `which pygmentize-2.7`		${HOME}/bin/pygmentize  # Python highlighter
