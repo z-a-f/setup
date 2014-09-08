@@ -2,7 +2,7 @@
 
 COMP="c++"
 ARGS=""
-ARGS="${ARGS} -std=c++1y"	# Compiler version
+ARGS="${ARGS} -std=c++11"	# Compiler version
 ARGS="${ARGS} -lm" 		# Attach libraries by default
 ARGS="${ARGS} -ggdb -g -O0"	# Debugging and optimization options
 ARGS="${ARGS} -Wall"		# Warnings and errors
