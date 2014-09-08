@@ -8,7 +8,19 @@ Folder/File structure:
 * dotfiles/    -> contains the setup files to be put in the home directory \n
 * setup.sh     -> Setup file to install all the setup files...
 
-dotfiles.git
+setup.git
+=========
+Clone and run this on any Linux/Unix machine:
+```bash
+cd ${HOME}
+git clone https://github.com/zafartahirov/setup.git
+cd setup
+./setup.sh
+```
+
+!!!Note!!! Backup ALL of your dotfiles! This is VERY important!
+
+dotfiles.git -> Original
 ============
 Clone and run this on a new EC2 instance running Ubuntu 12.04.2 LTS to
 configure your `bash` and `emacs` development environment as follows:
