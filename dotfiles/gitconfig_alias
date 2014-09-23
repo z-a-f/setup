@@ -109,7 +109,7 @@
 	s = status
 	sb = status -s -b
 	#############
-	send  = !git add . && git commit -m "\"AUTOCOMMIT: $(date)\"" && git push
+	send  = !git add . && git commit -m "\"AUTOCOMMIT(`whoami`@`hostname`): $(date)\"" && git push
 	#############
 	sa = stash apply
 	sc = stash clear
