@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+##################################################################
 # Define basic colors as a starting point:
 if [ "$(uname)" == "Darwin" ]; then
     source ./dotfiles/bash_colors_Darwin
@@ -7,6 +8,8 @@ else
     source ./dotfiles/bash_colors_Linux
 fi
 
+##################################################################
+# Show Warning:
 WARNINGMSG="\t${BIRed}!!!WARNING!!!${Color_Off}\n
 This script is ${BIRed}DESTRUCTIVE!${Color_Off} It overwrites
 all your previous (dotfile) setup.
@@ -18,6 +21,8 @@ WARN="${BIYellow}*WARN*,${Color_Off}"
 echo -e "${WARNINGMSG}"
 read cancel
 
+##################################################################
+# Setup Links:
 SETUPDIR=`pwd`
 cd ${HOME}
 echo -e "${INFO} Removing the old dotfiles"
@@ -41,6 +46,16 @@ ln -sfv	${SETUPDIR}/dotfiles/bashrc		${HOME}/.bashrc
 ln -sfv	${SETUPDIR}/dotfiles/bashrc_custom	${HOME}/.bashrc_custom
 ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
 
+ln -svf `which pygmentize-2.7`			${HOME}/bin/pygmentize  # Python highlighter
+
+# Create basic MUTT setup if it doesn't exist:
+if [ ! -f ${HOME}/.muttrc ]; then
+    echo -e "${INFO} Creating basic MUTTRC"
+    echo -e "${WARN} Please, modify it!"
+    ln -sv ${SETUPDIR}/dotfiles/muttrc		${HOME}/.muttrc
+fi
+
+##################################################################
 # Create color link:
 if [ "$(uname)" == "Darwin" ]; then	# Mac
     ln -sfv	${SETUPDIR}/dotfiles/bash_colors_Darwin	${HOME}/.bash_colors
@@ -48,6 +63,7 @@ else
     ln -sfv	${SETUPDIR}/dotfiles/bash_colors_Linux	${HOME}/.bash_colors
 fi
 
+##################################################################
 # GIT:
 echo -e "${INFO} Setting up GIT"
 if [ -d ${HOME}/.git.OLD/ ]; then
@@ -79,7 +95,9 @@ else
 
 fi
 
-rm ${HOME}/.nanorc
+##################################################################
+# Setup NANO:
+rm -v ${HOME}/.nanorc
 # Install NANO colors:
 echo -e "${INFO} Setting up NANO"
 cd ${SETUPDIR}
@@ -91,6 +109,7 @@ make install
 echo 'include ~/.nano/syntax/ALL.nanorc' > ~/.nanorc
 # rm -rf ${SETUPDIR}/nanorc
 
+##################################################################
 # Setup COLORGCC:
 echo -e "${INFO} Setting up COLORGCC"
 echo -e "${WARN} Please, check ${HOME}/.colorgccrc"
@@ -102,7 +121,8 @@ ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-gcc
 ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-c++
 ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-cc
 
-### Setup scripts:
+##################################################################
+# Setup scripts:
 echo -e "${INFO} Setting up scripts"
 if [ ! -d ${HOME}/bin ]; then
     echo -e "${WARN} ${HOME}/bin not found"
@@ -113,4 +133,4 @@ fi
 ln -svf	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
 ln -svf	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
 
-ln -svf `which pygmentize-2.7`		${HOME}/bin/pygmentize  # Python highlighter
+
