@@ -47,29 +47,12 @@
 ## -----------------------
 ## -- 1) Import .bashrc --
 ## -----------------------
-
 # Factor out all repeated profile initialization into .bashrc
 #  - All non-login shell parameters go there
 #  - All declarations repeated for each screen session go there
 if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
+    source ~/.bashrc
 fi
 
-# Configure PATH
-#  - These are line by line so that you can kill one without affecting the others.
-#  - Lowest priority first, highest priority last.
-export PATH=$PATH
-export PATH=$HOME/bin:$PATH
-export PATH=/usr/bin:$PATH
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-export PATH=/usr/local/heroku/bin:$PATH # Heroku: https://toolbelt.heroku.com/standalone
 
-##
-# Your previous /Users/ZafarTakhirov/.bash_profile file was backed up as /Users/ZafarTakhirov/.bash_profile.macports-saved_2014-05-13_at_00:20:38
-##
-
-# MacPorts Installer addition on 2014-05-13_at_00:20:38: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
 
