@@ -39,7 +39,32 @@
 #      --norc option. The --rcfile file option will force Bash to read and
 #      execute commands from file instead of ~/.bashrc.
 
+# -----------------------
+# -- 1.0) Create PATHs --
+# -----------------------
+# 1.0.1) Safe PATH handling:
+pathmunge () {
+    if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
+	PATH=$1:$PATH
+    fi
+}
 
+# 1.0.2) Configure PATH
+#  - These are line by line so that you can kill one without affecting the others.
+#  - Lowest priority first, highest priority last.
+# export PATH=$PATH
+# export PATH=$HOME/bin:$PATH
+# export PATH=/usr/bin:$PATH
+# export PATH=/usr/local/bin:$PATH
+# export PATH=/usr/local/sbin:$PATH
+# export PATH=/usr/local/heroku/bin:$PATH # Heroku: https://toolbelt.heroku.com/standalone
+pathmunge /usr/bin		# Global bins
+pathmunge /usr/local/bin
+pathmunge /usr/local/sbin
+pathmunge /usr/local/heroku/bin # Heroku bins: https://toolbelt.heroku.com/standalone
+pathmunge /opt/local/sbin
+pathmunge /opt/local/bin	# MACPORTS
+export PATH
 
 # -----------------------------------
 # -- 1.1) Set up umask permissions --
@@ -225,5 +250,11 @@ fi
 ## ------------------------------
 
 ## Define any user-specific variables you want here.
-source ~/.bash_colors
-source ~/.bashrc_custom
+if [ -f ~/.bash_colors ]; then
+    # echo -e "*INFO*, Loading custom colors"
+    source ~/.bash_colors
+fi
+if [ -f ~/.bashrc_custom ]; then
+    # echo -e "*INFO*, Loading custom .bashrc"
+    source ~/.bashrc_custom
+fi
