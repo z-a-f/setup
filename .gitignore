@@ -4,3 +4,5 @@ nanorc
 dotfiles/emacs.d/.emacs.d
 dotfiles/emacs.d/auto*
 dotfiles/emacs.d/session*
+
+dotfiles/muttrc

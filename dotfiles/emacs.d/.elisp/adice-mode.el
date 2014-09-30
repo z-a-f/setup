@@ -59,6 +59,8 @@ be toggled on and off with the \\[adice-toggle-comment] command.")
   (list
    ;; comments: first non-whitespace is '*'
    '("^[ \\\t]*\\*.*" . font-lock-comment-face)
+   ;; comments: everything between '/*' and '*/'
+   '("/\\*.*\\*/" . font-lock-comment-face)
 
    ;; strings
    ;; (shown without delimiting) aim to match:
