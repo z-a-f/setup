@@ -1,0 +1,73 @@
+#!/usr/bin/env perl
+
+use warnings;
+use strict;
+
+use vars qw/ %opt $LANG $filename $extension /;
+
+use Term::ANSIColor;
+
+my $DOGPATH = $ENV{"HOME"} . "/setup/dotfiles/dogrc";
+
+#######################################
+# Command line processing
+#######################################
+sub init () {
+    use Getopt::Std;
+    my $opt_string = 'hx:';
+    getopts("$opt_string", \%opt) or help();
+    help() if $opt{h};
+}
+
+#######################################
+# Help
+#######################################
+sub help() {
+    print STDERR << "EOF";
+NAME
+    dog - prints the file to standatd output with source highlighting
+
+SYNOPSIS
+    dog [OPTION] [FILE]
+
+DESCRIPTION
+    -n
+    	Show line numbers
+    -x LANGUAGE
+    	Specify explicitly the language fi the following input files (rather than letting the compiler choose a default based on the file name suffix). Possible values for LANGUAGE are:
+    <TODO: Language list>
+
+EOF
+    exit;
+}
+
+#######################################
+# Load the file
+#######################################
+sub loadFile() {
+    if (! $ARGV[0]) {
+	die "No file specified, $!";
+    }
+    open (FILE, "$ARGV[0]") or die "Cannot open file $ARGV[0], $!";
+}
+
+#######################################
+# Open configuration and set the language
+#######################################
+sub config() {
+    open (CONFIG, "<$DOGPATH/dogrc") or die "Cannot open configuration file $DOGPATH, $!";
+    if ($opt{x}) {
+	$LANG = $opt{x};
+    } else {
+	print "WOOPS\n";
+    }
+    close (CONFIG);
+}
+
+
+#######################################
+# Main
+#######################################
+init();
+loadFile();
+config();

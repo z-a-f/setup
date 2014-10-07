@@ -1,0 +1,14 @@
+Woohoo, declaring my own format!! :)
+
+Declare the path:
+# <DOGPATH="~/setup/dotfiles/dogrc/"/>
+
+Specify where the languages are:
+<LANGS=$DOGPATH/langs/>
+	<PERL>perl.dog</PERL>
+</LANGS>
+
+Specify the file associations (Use perl regular expressions)
+<EXTENSIONS>
+	<PERL>""</PERL>
+</EXTENSIONS>
