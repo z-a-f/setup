@@ -46,7 +46,7 @@ ln -sfv	${SETUPDIR}/dotfiles/bashrc		${HOME}/.bashrc
 ln -sfv	${SETUPDIR}/dotfiles/bashrc_custom	${HOME}/.bashrc_custom
 ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
 
-ln -svf `which pygmentize-2.7`			${HOME}/bin/pygmentize  # Python highlighter
+# ln -svf `which pygmentize-2.7`			${HOME}/bin/pygmentize  # Python highlighter
 
 # Create basic MUTT setup if it doesn't exist:
 if [ ! -f ${HOME}/.muttrc ]; then
@@ -72,7 +72,7 @@ fi
 mkdir ${HOME}/.git.OLD
 
 # move .gitignore:
-mv -fv ${HOME}/.gitignore ${HOME}/.git.OLD/
+mv -fv 	${HOME}/.gitignore 			${HOME}/.git.OLD/
 ln -sv	${SETUPDIR}/dotfiles/gitignore		${HOME}/.gitignore
 
 # create .gitconfig:

@@ -1,5 +1,14 @@
+# .bashrc_custom file
+# By Zafar M. Takhirov (cc.rafaz@zafar.cc)
+#
+# This file can have anything that is not included in .bashrc
+# Use this file for customization rather than global/environment setup
+
 # Custom BIN paths:
-PATH=$HOME/bin:$HOME/.local/bin:${PATH}
+# PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
+pathmunge ${HOME}/.local/bin
+pathmunge ${HOME}/bin
+export PATH
 # Custom bin paths have to be BEFORE $PATH.
 # We want our scripts to have priority, right?
 
@@ -26,7 +35,7 @@ alias mkdir='mkdir -pv'
 alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
-alias valgrind='valgrind --leak-check=full --show-leak-kinds=all --tool=memcheck'
+alias valgrind='valgrind --leak-check=full --tool=memcheck'
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
@@ -53,4 +62,4 @@ rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
 
 # Fixes and Bugs:
-LANG=en_US.UTF8
+# LANG=en_US.UTF8
