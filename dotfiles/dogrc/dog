@@ -1,0 +1,102 @@
+#!/usr/bin/env perl
+
+use warnings;
+use strict;
+use local::lib;
+
+use vars qw/ %opt %lang $FH $filename $extension /;
+
+use HTML::TagParser;
+use Term::ANSIColor;
+
+my $DOGPATH = $ENV{"HOME"} . "/setup/dotfiles/dogrc";
+
+#######################################
+# Command line processing
+#######################################
+sub init () {
+    use Getopt::Std;
+    my $opt_string = 'hx:';
+    getopts("$opt_string", \%opt) or help();
+    help() if $opt{h};
+    return getNames();
+}
+
+#######################################
+# Help
+#######################################
+sub help() {
+    print STDERR << "EOF";
+NAME
+    dog - prints the file to standatd output with source highlighting
+
+SYNOPSIS
+    dog [OPTION] [FILE]
+
+DESCRIPTION
+    -n
+    	Show line numbers
+    -x LANGUAGE
+    	Specify explicitly the language fi the following input files (rather than letting the compiler choose a default based on the file name suffix). Possible values for LANGUAGE are:
+    <TODO: Language list>
+
+EOF
+    exit;
+}
+
+#######################################
+# Get the names
+#######################################
+sub getNames() {
+    if (! $ARGV[0]) {
+	die "No file to open, $!";
+    }
+    my $fname = $ARGV[0];
+    my ($ext) = $fname =~ /(\.[^.]+)$/;
+    open my $fh, '<', $fname or die "Cannot open file $fname, $!";
+    return ($fh, $fname, $ext);
+}
+
+#######################################
+# Open configuration and set the language
+#######################################
+sub config() {
+    open my $conf_fh, '<', "$DOGPATH/.dogrc" or die "Cannot open configuration file at $DOGPATH, $!";
+    if (!$extension && !$opt{x}) {
+	# If no explicit language + no extension
+	cat();
+	exit;
+    } else {
+	return language($conf_fh);
+    }
+    close $conf_fh;
+}
+
+sub language () {
+    # Expects filehandler
+    my $fh = $_[0];
+    my $langs_HTML = HTML::TagParser->new($_[0]);
+}
+
+#######################################
+# CAT
+#######################################
+sub cat() {
+    #open (FILE, "<$filename") or die "Cannot open file $filename, $!";
+    print colored ("#######################################\n", 'green');
+    print colored ("# Cannot identify language...\n", 'green');
+    print colored ("#######################################\n", 'green');
+    while (<$FH>) {
+	print "$_";
+    }
+    print colored ("#######################################\n", 'green');
+}
+
+
+#######################################
+# Main
+#######################################
+($FH, $filename, $extension) = init();
+%lang = config();
+print $filename . "\n";
+print $extension . "\n";

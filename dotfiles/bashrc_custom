@@ -1,4 +1,4 @@
-# .bashrc_custim file
+# .bashrc_custom file
 # By Zafar M. Takhirov (cc.rafaz@zafar.cc)
 #
 # This file can have anything that is not included in .bashrc
@@ -35,7 +35,7 @@ alias mkdir='mkdir -pv'
 alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
-alias valgrind='valgrind --leak-check=full --show-leak-kinds=all --tool=memcheck'
+alias valgrind='valgrind --leak-check=full --tool=memcheck'
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then

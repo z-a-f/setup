@@ -1,0 +1,20 @@
+<!--
+// Declare the path:
+//  <DOGPATH="~/setup/dotfiles/dogrc/"/>
+-->
+
+<!-- Specify where the languages are: -->
+<LANGS path="$DOGPATH/langs/">
+  <PERL>
+  	<FILE>"perl.dog"</FILE>
+  	<REGEX>"/\.(pl)$/"</REGEX>
+  </PERL>
+  <BASH>
+	  <FILE>"bash.dog"</FILE>
+	  <REGEX>"/\.(sh|bash)$/"</REGEX>
+  </BASH>
+</LANGS>
+
+<THEMES path="$DOGPATH/themes/">
+</THEMES>
+
