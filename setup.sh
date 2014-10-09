@@ -132,5 +132,5 @@ fi
 
 ln -svf	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
 ln -svf	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
-
+ln -svf ${SETUPDIR}/scripts/repo	${HOME}/bin/repo	# Android GIT wrapper
 

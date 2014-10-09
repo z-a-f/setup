@@ -6,3 +6,5 @@ dotfiles/emacs.d/auto*
 dotfiles/emacs.d/session*
 
 dotfiles/muttrc
+
+.repo
