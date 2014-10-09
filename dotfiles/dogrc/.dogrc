@@ -1,20 +1,21 @@
-<!--
-// Declare the path:
-//  <DOGPATH="~/setup/dotfiles/dogrc/"/>
--->
+#!/usr/bin/env perl
+############################
+use strict;
+use warnings;
+use DBI;
+############################
 
-<!-- Specify where the languages are: -->
-<LANGS path="$DOGPATH/langs/">
-  <PERL>
-  	<FILE>"perl.dog"</FILE>
-  	<REGEX>"/\.(pl)$/"</REGEX>
-  </PERL>
-  <BASH>
-	  <FILE>"bash.dog"</FILE>
-	  <REGEX>"/\.(sh|bash)$/"</REGEX>
-  </BASH>
-</LANGS>
+our %CONFIG = (
+    'LANGS' => {
+	'PERL' => {
+	    'FILE' => '$DOGPATH/langs/perl.dog',
+	    'REGEX' => qr/\.p(l|m)$/
+	},
+	'BASH' => {
+	    'FILE' => '$DOGPATH/langs/bash.dog',
+	    'REGEX' => qr/\.(sh|bash)$/
+    	}
+    }
+);
 
-<THEMES path="$DOGPATH/themes/">
-</THEMES>
-
+1;
