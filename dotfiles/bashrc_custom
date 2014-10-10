@@ -39,7 +39,8 @@ alias valgrind='valgrind --leak-check=full --tool=memcheck'
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
-    alias emacsapp='open -a /Applications/MacPorts/Emacs.app'
+    # alias emacsapp='open -a /Applications/MacPorts/Emacs.app --args'
+    alias Emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs -g 103x100'
 fi
 
 # If the computer is not Darwin:
