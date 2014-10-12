@@ -12,7 +12,7 @@ use Data::Dumper; #Debug
 
 my $DOGPATH = $ENV{"HOME"} . "/setup/dotfiles/dogrc";
 # our %CONFIG;
-require "$DOGPATH/.dogrc";
+# require "$DOGPATH/.dogrc";
 
 #######################################
 # Command line processing
@@ -73,35 +73,25 @@ sub config() {
     } else {
 	# return language($conf_fh);
 	# print Dumper($CONFIG{'LANGS'});
-	print Dumper(\%CONFIG{'LANGS'});
+	%CONFIG = do './.dogrc';
+	# print Dumper(\%CONFIG);
     }
-}
-
-####################
-# Identify language
-####################
-sub language () {
-    #####
-    # my %temp = ();
-    # $temp{"LANGS"}{"PATH"} = "$DOGPATH/langs";
-    # $temp{"LANGS"}{"PERL"}{"FILE"} = $temp{"LANGS"}{"PATH"} . "/perl.dog";
-    # $temp{"LANGS"}{"PERL"}{"REGEX"} = qr/\.p(l|m)$/;
-    # print Dumper(\%temp);
-    #####
     
-    # Expects filehandle
-    my $fh = $_[0];
-    my %config;
-    
-    # First get the configuration HTML (sorta):
-    my @stack = ();
-    #while(<$fh>) {
-    #if 
-    #}
-    
-    #Placeholder
-    my %a;
-    return %a; 
+    # See if language list exists:
+    foreach my $key1 (%CONFIG) {
+	if ($key1 eq "LANGS") {
+	    # print "LANGS found \n";
+	    # print $CONFIG{$key};
+	    foreach my $key2 (%{$CONFIG{$key1}}) {
+		if ($key2 eq $opt{x}) {
+		    # print "$opt{x} found\n";
+		} else {
+		    die "Explicitely defined language '$opt{x}' not found in the configuration, $!";
+		}
+	    }
+	}
+    }
+    return 0;
 }
 
 #######################################
@@ -123,6 +113,7 @@ sub cat() {
 # Main
 #######################################
 ($FH, $filename, $extension) = init();
-%lang = config();
+print config();
+
 #print $filename . "\n";
 #print $extension . "\n";

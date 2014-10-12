@@ -1,21 +1,11 @@
-#!/usr/bin/env perl
-############################
-use strict;
-use warnings;
-use DBI;
-############################
-
-our %CONFIG = (
-    'LANGS' => {
-	'PERL' => {
-	    'FILE' => '$DOGPATH/langs/perl.dog',
-	    'REGEX' => qr/\.p(l|m)$/
-	},
-	'BASH' => {
-	    'FILE' => '$DOGPATH/langs/bash.dog',
-	    'REGEX' => qr/\.(sh|bash)$/
-    	}
+LANGS => {
+    PERL => {
+	FILE => '$DOGPATH/langs/perl.dog',
+	REGEX => qr/\.p(l|m)$/
+    },
+    BASH => {
+	FILE => '$DOGPATH/langs/bash.dog',
+	REGEX => qr/\.(sh|bash)$/
     }
-);
-
-1;
+},
+THEMES => {}
