@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-COMP="gcc"
+COMP="g++"			# g++ is the best, as gcc fails :(
 ARGS=""
 ARGS="${ARGS} -std=c++11"	# Compiler version
 ARGS="${ARGS} -lm" 		# Attach libraries by default
