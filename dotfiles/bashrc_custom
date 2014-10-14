@@ -28,7 +28,8 @@ export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
 
 # Change the aliases:
 alias cp='cp -rv'
-alias dog='highlight -O ansi --failsafe'
+# alias dog='highlight -O ansi --failsafe'
+alias dog='highlight -O xterm256 --failsafe'
 alias ls='ls -GFh'
 alias ll='ls -GFhal'
 alias mkdir='mkdir -pv'

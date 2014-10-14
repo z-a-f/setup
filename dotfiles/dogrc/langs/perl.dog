@@ -1,0 +1,15 @@
+
+REGEX => {
+    COMMENT => '#.*$',
+    DEFAULT => '.*'
+},
+
+COLOR => {
+    COMMENT => 'red on_green',
+    DEFAULT => 'white'
+},
+
+PRIORITY => [
+    COMMENT,
+    DEFAULT
+]

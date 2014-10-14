@@ -1,11 +1,11 @@
 LANGS => {
     PERL => {
-	FILE => '$DOGPATH/langs/perl.dog',
-	REGEX => qr/\.p(l|m)$/
+	FILE => "$DOGPATH/langs/perl.dog",
+	REGEX => '\.(pl|pm)$'
     },
     BASH => {
-	FILE => '$DOGPATH/langs/bash.dog',
-	REGEX => qr/\.(sh|bash)$/
+	FILE => "$DOGPATH/langs/bash.dog",
+	REGEX => '\.(sh|bash)$'
     }
 },
 THEMES => {}
