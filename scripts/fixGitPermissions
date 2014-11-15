@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+git filter-branch -f --tree-filter 'find * -type f | xargs chmod 644 ' -- --all
