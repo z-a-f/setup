@@ -45,6 +45,7 @@
 # 1.0.1) Safe PATH handling:
 pathmunge () {
     if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
+	# echo "Pushing $1"
 	PATH=$1:$PATH
     fi
 }

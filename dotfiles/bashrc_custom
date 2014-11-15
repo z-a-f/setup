@@ -37,6 +37,8 @@ alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
+alias adbreset='adb kill-server && adb start-server'
+
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
@@ -62,6 +64,8 @@ mcd() { mkdir -pv "$1" && cd "$1"; }		# Make directory and cd there
 ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
 rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
+# User Environment Variables:
+GRADLE_HOME='/opt/local/share/java/gradle'
 
 # Fixes and Bugs:
 # LANG=en_US.UTF8
