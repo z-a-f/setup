@@ -16,7 +16,7 @@ export PATH
 # PATH=$PATH:/Developer/Simulator/Icarus/bin
 
 # Change the prompt:
-export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\] \$ "
+export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\]\n\$> "
 
 # Setup better colors:
 #export CLICOLOR=1
@@ -70,7 +70,8 @@ ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
 rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
 # User Environment Variables:
-GRADLE_HOME='/opt/local/share/java/gradle'
+export GRADLE_HOME='/opt/local/share/java/gradle'
+export GEM_HOME="$HOME/.gem/ruby/2.0.0"
 
 # Fixes and Bugs:
 # LANG=en_US.UTF8
