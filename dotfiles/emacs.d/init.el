@@ -205,6 +205,7 @@
 ;; --------------------
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(custom-set-faces (if (not window-system) '(default ((t (:background "black"))))))
 
 ;; ---------------
 ;; -- Mac Stuff --

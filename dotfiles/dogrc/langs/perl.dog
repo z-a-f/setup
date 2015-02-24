@@ -1,15 +1,16 @@
 
 REGEX => {
-    COMMENT => '#.*$',
-    DEFAULT => '.*'
+    COMMENT => {
+	['^=\w+','^=cut'],
+	'#.*$'
+    },
 },
 
 COLOR => {
-    COMMENT => 'red on_green',
+    COMMENT => 'blue',
     DEFAULT => 'white'
 },
 
 PRIORITY => [
     COMMENT,
-    DEFAULT
 ]
