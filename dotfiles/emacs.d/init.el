@@ -77,6 +77,9 @@
  '(secondary-selection ((((class color) (min-colors 8)) (:background "gray" :foreground "cyan"))))
  '(show-paren-match ((((class color) (background light)) (:background "black"))))
  '(vertical-border ((t nil))))
+;; My own color modification:
+(set-face-foreground 'minibuffer-prompt "white")
+
 
 ;; ---------------
 ;; -- Functions --
