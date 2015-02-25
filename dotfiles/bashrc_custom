@@ -16,7 +16,7 @@ export PATH
 # PATH=$PATH:/Developer/Simulator/Icarus/bin
 
 # Change the prompt:
-export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\] \$ "
+export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\]\n\$> "
 
 # Setup better colors:
 #export CLICOLOR=1
@@ -37,11 +37,18 @@ alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
+alias adbreset='adb kill-server && adb start-server'
+
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
     # alias emacsapp='open -a /Applications/MacPorts/Emacs.app --args'
     alias Emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs -g 103x100'
+
+    # Setup scala directory for Mac OSX
+    pathmunge ${HOME}/Library/Scala
+    pathmunge ${HOME}/Library/Scala/bin
+    export PATH
 fi
 
 # If the computer is not Darwin:
@@ -62,6 +69,15 @@ mcd() { mkdir -pv "$1" && cd "$1"; }		# Make directory and cd there
 ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
 rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
+# User Environment Variables:
+export GRADLE_HOME='/opt/local/share/java/gradle'
+export GEM_HOME="$HOME/.gem/ruby/2.0.0"
 
 # Fixes and Bugs:
 # LANG=en_US.UTF8
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Applications/Code Development/Tools/SDKs/google-cloud-sdk/path.bash.inc'
+
+# The next line enables bash completion for gcloud.
+source '/Applications/Code Development/Tools/SDKs/google-cloud-sdk/completion.bash.inc'

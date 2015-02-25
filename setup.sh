@@ -114,6 +114,16 @@ make install
 echo 'include ~/.nano/syntax/ALL.nanorc' > ~/.nanorc
 # rm -rf ${SETUPDIR}/nanorc
 
+
+##################################################################
+# Setup scripts:
+echo -e "${INFO} Setting up scripts"
+if [ ! -d ${HOME}/bin ]; then
+    echo -e "${WARN} ${HOME}/bin not found"
+    echo "Creating directory: ${HOME}/bin/"
+    mkdir ${HOME}/bin
+fi
+
 ##################################################################
 # Setup COLORGCC:
 echo -e "${INFO} Setting up COLORGCC"
@@ -126,15 +136,8 @@ ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-gcc
 ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-c++
 ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-cc
 
-##################################################################
-# Setup scripts:
-echo -e "${INFO} Setting up scripts"
-if [ ! -d ${HOME}/bin ]; then
-    echo -e "${WARN} ${HOME}/bin not found"
-    echo "Creating directory: ${HOME}/bin/"
-    mkdir ${HOME}/bin
-fi
 
 ln -svf	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
 ln -svf	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
 ln -svf ${SETUPDIR}/scripts/repo	${HOME}/bin/repo	# Android GIT wrapper
+ln -svf ${SETUPDIR}/scripts/fixGitPermissions	${HOME}/bin/fixGitPermissions

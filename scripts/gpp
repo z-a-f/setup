@@ -30,7 +30,7 @@ if [[ ! -f ${fNameIn} || ${fNameIn}==${extension} ]]; then
 	fNameIn=.${extension}.c
 	fNameOut="${fNameIn%.*}"
     else
-	echo "File ${fNameIn} not found"
+	echo "File ${fNameIn} not found or extension not recognized"
 	exit
     fi
 fi

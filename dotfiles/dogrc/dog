@@ -97,7 +97,7 @@ sub findLang() {
 		    # print $extension =~ /$regexp/;
 		    # print "\n";
 		    # return $extension;
-		    if ($extension =~ /$regexp/) {
+		    if ($extension && $extension =~ /$regexp/) {
 			return $CONFIG{$key1}{$key2}{'FILE'};
 		    }
 		}
@@ -132,17 +132,21 @@ sub process{
     %CONFIG = do "$cName";
     
     while (<$FH>) {
+	foreach my $char (split("", $_)) {
+	    print colored("$char", 'red');
+	}
 	# Foreach regex check in order and stop whenever found
+=begin COMMENT
 	foreach my $reg (@{$CONFIG{PRIORITY}}) {
 	    # print Dumper($CONFIG{REGEX}{$reg});
 	    my $regexp = "$CONFIG{REGEX}{$reg}";
-	    if (my ($line) = $_ =~ /$regexp/) {
-		print colored ($line, "$CONFIG{COLOR}{$reg}");
+	    if (my @line = $_ =~ /$regexp/) {
+		print colored (@line, "$CONFIG{COLOR}{$reg}");
 		last;
 	    }
 	    
 	}
-	
+=cut
 	#foreach my $regex ($CONFIG{PRIORITY}) {
 	#    print $CONFIG{REGEX}{PRIORITY} . "\n";
 	#}

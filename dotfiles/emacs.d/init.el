@@ -31,6 +31,20 @@
 (setq suggest-key-bindings t)
 (setq vc-follow-symlinks t)
 
+;; ------------------------
+;; -- Enable XTERM mouse --
+;; ------------------------
+(unless (string-equal system-type "windows-nt")
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] 
+		  '(lambda() (interactive) (scroll-down 1)))
+  (global-set-key [mouse-5]
+		  '(lambda() (interactive) (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
+
 ;; --------------------------
 ;; -- Custom Set Variables --
 ;; --------------------------
@@ -64,6 +78,9 @@
  '(secondary-selection ((((class color) (min-colors 8)) (:background "gray" :foreground "cyan"))))
  '(show-paren-match ((((class color) (background light)) (:background "black"))) t)
  '(vertical-border ((t nil))))
+;; My own color modification:
+(set-face-foreground 'minibuffer-prompt "white")
+
 
 ;; ---------------
 ;; -- Functions --
@@ -187,6 +204,7 @@
 ;; --------------------
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(custom-set-faces (if (not window-system) '(default ((t (:background "black"))))))
 
 ;; ---------------
 ;; -- Mac Stuff --
