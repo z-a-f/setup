@@ -44,7 +44,7 @@ ln -sfv	${SETUPDIR}/dotfiles/screenrc		${HOME}/.screenrc
 ln -sfv	${SETUPDIR}/dotfiles/bash_profile	${HOME}/.bash_profile
 ln -sfv	${SETUPDIR}/dotfiles/bashrc		${HOME}/.bashrc
 ln -sfv	${SETUPDIR}/dotfiles/bashrc_custom	${HOME}/.bashrc_custom
-ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
+
 
 # ln -svf `which pygmentize-2.7`			${HOME}/bin/pygmentize  # Python highlighter
 
@@ -94,6 +94,11 @@ else
     echo -e ".gitconfig_user exists!\n" # Don't everwrite the USER info - might have tokens
 
 fi
+
+##################################################################
+# Setup Emacs:
+ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
+git clone git://github.com/hvesalai/sbt-mode.git ${HOME}/.emacs.d/.elisp/sbt-mode
 
 ##################################################################
 # Setup NANO:
