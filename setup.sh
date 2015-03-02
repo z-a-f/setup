@@ -148,3 +148,4 @@ pushd .
 cd ${SETUPDIR}/dotfiles/emacs.d/.elisp/
 # (Need to setup MELPA :( )
 rm -rfv go-mode.el && git clone git@github.com:zafartahirov/go-mode.el.git
+popd
