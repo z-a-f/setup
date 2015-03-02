@@ -7,6 +7,8 @@
 ;; (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/.elisp")
 (add-to-list 'load-path "~/.emacs.d/.escript")
+(add-to-list 'load-path "~/.emacs.d/.elisp/go-mode.el/")
+(require 'go-mode-autoloads)
 (require 'cl)
 (require 'ido)
 (require 'ffap)

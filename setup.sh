@@ -136,3 +136,10 @@ ln -svf	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
 ln -svf	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
 ln -svf ${SETUPDIR}/scripts/repo	${HOME}/bin/repo	# Android GIT wrapper
 ln -svf ${SETUPDIR}/scripts/fixGitPermissions	${HOME}/bin/fixGitPermissions
+
+##################################################################
+# Emacs pacakges
+pushd .
+cd ${SETUPDIR}/dotfiles/emacs.d/.elisp/
+# (Need to setup MELPA :( )
+rm -rfv go-mode.el && git clone git@github.com:zafartahirov/go-mode.el.git
