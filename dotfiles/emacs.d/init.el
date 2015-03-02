@@ -20,6 +20,7 @@
 (require 'whitespace)
 (require 'dired-x)
 (require 'compile)
+
 (ido-mode t)
 (menu-bar-mode -1)
 (normal-erase-is-backspace-mode 1)
@@ -58,7 +59,7 @@
  '(column-number-mode t)
  '(comment-multi-line t)
  '(comment-style (quote indent))
- '(custom-enabled-themes (quote (deeper-blue)))
+ '(custom-enabled-themes (quote (tango-dark)))
  '(font-use-system-font t))
 
 (custom-set-faces
@@ -77,7 +78,7 @@
  '(linum ((t (:background "black" :foreground "green" :weight bold :width normal :height 98 :slant normal :family "DejaVu LGC Sans Mono" :foundry "unknown"))))
  '(region ((((class color) (min-colors 8)) (:background "white" :foreground "magenta"))))
  '(secondary-selection ((((class color) (min-colors 8)) (:background "gray" :foreground "cyan"))))
- '(show-paren-match ((((class color) (background light)) (:background "black"))))
+ '(show-paren-match ((((class color) (background light)) (:background "black"))) t)
  '(vertical-border ((t nil))))
 ;; My own color modification:
 (set-face-foreground 'minibuffer-prompt "white")
@@ -98,16 +99,6 @@
   (menu-bar-open)
   (setq menu-bar-mode 42)
   )
-
-;; -----------
-;; -- Hooks --
-;; -----------
-(add-hook 
- 'pre-command-hook
- (lambda()
-   (when (eq menu-bar-mode 42)
-     (menu-bar-mode -1))))
-
 
 ;; -------------
 ;; -- Globals --
@@ -157,6 +148,14 @@
 ;; -----------------
 (add-to-list 'load-path "~/.emacs.d/.elisp/matlab-emacs/matlab-emacs")
 (load-library "matlab-load")
+
+;; --
+;; -- Scala Mode --
+;; --
+(add-to-list 'load-path "~/.emacs.d/.elisp/sbt-mode")
+;; (require sbt-mode)
+(autoload 'sbt-mode "sbt-mode" "Scala SBT mode" t)
+
 
 ;; ------------------
 ;; -- Verilog Mode --
@@ -226,3 +225,35 @@
     (message "Linux") )
   )
  )
+
+
+;; -----------
+;; -- Hooks --
+;; -----------
+(add-hook 
+ 'pre-command-hook
+ (lambda()
+   (when (eq menu-bar-mode 42)
+     (menu-bar-mode -1)
+     )
+   )
+ )
+
+(add-hook 'sbt-mode-hook '(lambda ()
+  ;; compilation-skip-threshold tells the compilation minor-mode
+  ;; which type of compiler output can be skipped. 1 = skip info
+  ;; 2 = skip info and warnings.
+  (setq compilation-skip-threshold 1)
+
+  ;; Bind C-a to 'comint-bol when in sbt-mode. This will move the
+  ;; cursor to just after prompt.
+  (local-set-key (kbd "C-a") 'comint-bol)
+
+  ;; Bind M-RET to 'comint-accumulate. This will allow you to add
+  ;; more than one line to scala console prompt before sending it
+  ;; for interpretation. It will keep your command history cleaner.
+  (local-set-key (kbd "M-RET") 'comint-accumulate)
+  ))
+
+
+
