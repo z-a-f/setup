@@ -95,10 +95,15 @@ else
 
 fi
 
+# If the version of the git < 1.7.10, everything has to be pasted in the gitconfig :(
+git_version=`git --version`
+[[ $git_version =~ ([a-zA-Z ]+)([0-9\.]+) ]] # && echo "${BASH_REMATCH[2]}"
+
+
 ##################################################################
 # Setup Emacs:
 ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
-git clone git://github.com/hvesalai/sbt-mode.git ${HOME}/.emacs.d/.elisp/sbt-mode
+git clone https://github.com/hvesalai/sbt-mode.git ${HOME}/.emacs.d/.elisp/sbt-mode
 
 ##################################################################
 # Setup NANO:
@@ -147,5 +152,5 @@ ln -svf ${SETUPDIR}/scripts/fixGitPermissions	${HOME}/bin/fixGitPermissions
 pushd .
 cd ${SETUPDIR}/dotfiles/emacs.d/.elisp/
 # (Need to setup MELPA :( )
-rm -rfv go-mode.el && git clone git@github.com:zafartahirov/go-mode.el.git
+rm -rfv go-mode.el && git clone https://github.com/zafartahirov/go-mode.el.git
 popd
