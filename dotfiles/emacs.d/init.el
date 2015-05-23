@@ -7,8 +7,6 @@
 ;; (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/.elisp")
 (add-to-list 'load-path "~/.emacs.d/.escript")
-(add-to-list 'load-path "~/.emacs.d/.elisp/go-mode.el/")
-(require 'go-mode-autoloads)
 (require 'cl)
 (require 'ido)
 (require 'ffap)
@@ -185,6 +183,12 @@
 ;; ----------------
 (autoload 'adice-mode "adice-mode" "ADICE mode" t)
 
+;; -------------
+;; -- GO mode --
+;; -------------
+(add-to-list 'load-path "~/.emacs.d/.elisp/go-mode.el/")
+(require 'go-mode-autoloads)
+
 ;; ---------------------
 ;; -- File Extensions --
 ;; ---------------------
@@ -255,5 +259,9 @@
   (local-set-key (kbd "M-RET") 'comint-accumulate)
   ))
 
-
-
+;; -----------------------
+;; -- Overriding variables
+;; -----------------------
+(setq-default indent-tabs-mode t)
+(setq-default tab-width 4)
+(setq tab-width 4)

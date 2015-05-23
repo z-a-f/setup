@@ -65,6 +65,7 @@ pathmunge /usr/local/sbin
 pathmunge /usr/local/heroku/bin # Heroku bins: https://toolbelt.heroku.com/standalone
 # pathmunge /opt/local/sbin
 # pathmunge /opt/local/bin	# MACPORTS
+pathmunge /usr/texbin			# MacTeX bins
 export PATH
 
 # -----------------------------------
@@ -259,3 +260,4 @@ if [ -f ~/.bashrc_custom ]; then
     # echo -e "*INFO*, Loading custom .bashrc"
     source ~/.bashrc_custom
 fi
+

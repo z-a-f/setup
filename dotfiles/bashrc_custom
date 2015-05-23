@@ -42,8 +42,7 @@ alias adbreset='adb kill-server && adb start-server'
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
-    # alias emacsapp='open -a /Applications/MacPorts/Emacs.app --args'
-    alias Emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs -g 103x100'
+    alias Emacs='open -a /Applications/Emacs.app'
 
     # Setup scala directory for Mac OSX
     pathmunge ${HOME}/Library/Scala
