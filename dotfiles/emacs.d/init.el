@@ -147,9 +147,9 @@
 (add-to-list 'load-path "~/.emacs.d/.elisp/matlab-emacs/matlab-emacs")
 (load-library "matlab-load")
 
-;; --
+;; ----------------
 ;; -- Scala Mode --
-;; --
+;; ----------------
 (add-to-list 'load-path "~/.emacs.d/.elisp/sbt-mode")
 ;; (require sbt-mode)
 (autoload 'sbt-mode "sbt-mode" "Scala SBT mode" t)
@@ -188,6 +188,16 @@
 ;; -------------
 (add-to-list 'load-path "~/.emacs.d/.elisp/go-mode.el/")
 (require 'go-mode-autoloads)
+
+;; -------------------
+;; -- Markdown mode --
+;; -------------------
+(add-to-list 'load-path "~/.emacs.d/.elisp/markdown-mode/")
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; ---------------------
 ;; -- File Extensions --

@@ -153,4 +153,5 @@ pushd .
 cd ${SETUPDIR}/dotfiles/emacs.d/.elisp/
 # (Need to setup MELPA :( )
 rm -rfv go-mode.el && git clone https://github.com/zafartahirov/go-mode.el.git
+rm -rfv markdown-mode && git clone git://jblevins.org/git/markdown-mode.git
 popd
