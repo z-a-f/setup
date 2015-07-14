@@ -3,8 +3,10 @@
 COMP="g++"			# g++ is the best, as gcc fails :(
 ARGS=""
 ARGS="${ARGS} -std=c++11"	# Compiler version
-ARGS="${ARGS} -lm" 		# Attach libraries by default
-ARGS="${ARGS} -ggdb -g -O0"	# Debugging and optimization options
+# ARGS="${ARGS} -stdlib=libstdc++"	# Standard lib to use
+ARGS="${ARGS} -lm"			# Attach libraries by default
+ARGS="${ARGS} -lc++"		# Attach libraries by default
+ARGS="${ARGS} -ggdb -g"		# Debugging
 ARGS="${ARGS} -Wall"		# Warnings and errors
 
 # It is already colored on MAC:
