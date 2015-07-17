@@ -42,7 +42,7 @@ if [ -f ${fNameOut} ]; then
 fi
 
 # Replace ${fNameIn} with ${1} so that any input parameter would work
-toRun="${COMP} ${ARGS} ${fNameIn} $@ -o ${fNameOut}"		
+toRun="${COMP} ${ARGS} ${fNameIn} $@ -o ${fNameOut}.bin"		
 
 {
     echo ${toRun} 
