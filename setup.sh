@@ -15,11 +15,44 @@ This script is ${BIRed}DESTRUCTIVE!${Color_Off} It overwrites
 all your previous (dotfile) setup.
 Press ${Cyan}<Ctrl+C>${Color_Off} NOW to cancel..."
 
-INFO="\n${BIGreen}*INFO*,${Color_Off}"
+INFO="${BIGreen}*INFO*,${Color_Off}"
 WARN="${BIYellow}*WARN*,${Color_Off}"
+ERR="${BIRed}*ERROR*,${Color_Off}"
 
 echo -e "${WARNINGMSG}"
 read cancel
+
+##################################################################
+# Install vital things:
+case $(uname -s) in
+    "Darwin")
+        if ! hash brew 2>/dev/null; then
+            echo -e "${ERR} Homebrew has to be installed before continuing!"
+            exit
+        fi
+        brew install ruby --upgrade
+        brew install emacs --upgrade
+        brew install aspell --upgrade
+        brew install git --upgrade
+        
+        ;;
+    *) # Need to setup other installations here
+        ;;
+esac
+
+
+##################################################################
+# Prepare global variables
+pathmunge () {
+    if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
+        if [ "$2" = "after" ] ; then
+            PATH=$PATH:$1
+        else
+            PATH=$1:$PATH
+        fi
+    fi
+}
+
 
 ##################################################################
 # Setup Links:
@@ -29,9 +62,9 @@ echo -e "${INFO} Removing the old dotfiles"
 if [ -d ./dotfiles/ ]; then
     mv -f dotfiles dotfiles.old
 fi
-if [ -d .emacs.d/ ]; then
-    mv .emacs.d .emacs.d~
-fi
+# if [ -d .emacs.d/ ]; then
+#     mv .emacs.d .emacs.d~
+# fi
 
 rm -v ${HOME}/.emacs.d
 rm -v ${HOME}/.screenrc
@@ -42,18 +75,18 @@ rm -v ${HOME}/.bash_colors
 echo -e "${INFO} Creating soft links"
 ln -sfv	${SETUPDIR}/dotfiles/screenrc		${HOME}/.screenrc
 ln -sfv	${SETUPDIR}/dotfiles/bash_profile	${HOME}/.bash_profile
-ln -sfv	${SETUPDIR}/dotfiles/bashrc		${HOME}/.bashrc
+ln -sfv	${SETUPDIR}/dotfiles/bashrc		    ${HOME}/.bashrc
 ln -sfv	${SETUPDIR}/dotfiles/bashrc_custom	${HOME}/.bashrc_custom
 
 
 # ln -svf `which pygmentize-2.7`			${HOME}/bin/pygmentize  # Python highlighter
 
 # Create basic MUTT setup if it doesn't exist:
-if [ ! -f ${HOME}/.muttrc ]; then
-    echo -e "${INFO} Creating basic MUTTRC"
-    echo -e "${WARN} Please, modify it!"
-    ln -sv ${SETUPDIR}/dotfiles/muttrc		${HOME}/.muttrc
-fi
+# if [ ! -f ${HOME}/.muttrc ]; then
+#     echo -e "${INFO} Creating basic MUTTRC"
+#     echo -e "${WARN} Please, modify it!"
+#     ln -sv ${SETUPDIR}/dotfiles/muttrc		${HOME}/.muttrc
+# fi
 
 ##################################################################
 # Create color link:
@@ -103,7 +136,21 @@ git_version=`git --version`
 ##################################################################
 # Setup Emacs:
 ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
-git clone https://github.com/hvesalai/sbt-mode.git ${HOME}/.emacs.d/.elisp/sbt-mode
+# export PRELUDE_INSTALL_DIR="${HOME}/.emacs.d/" && \
+# export PRELUDE_URL="https://github.com/zafartahirov/prelude.git" && \
+# curl -L https://github.com/zafartahirov/prelude/raw/master/utils/installer.sh | sh
+# git clone https://github.com/hvesalai/sbt-mode.git ${HOME}/.emacs.d/.elisp/sbt-mode
+export PRELUDE_INSTALL_DIR="${HOME}/.emacs.d/" && \ 
+curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh    # Get the latest prelude
+
+# Get my own configuration for the prelude
+pushd .
+cd ${PRELUDE_INSTALL_DIR}/personal
+git init
+git remote add origin git@github.com:zafartahirov/prelude.git
+git pull origin master
+
+popd
 
 ##################################################################
 # Setup NANO:
@@ -150,8 +197,8 @@ ln -svf ${SETUPDIR}/scripts/fixGitPermissions	${HOME}/bin/fixGitPermissions
 ##################################################################
 # Emacs pacakges
 pushd .
-cd ${SETUPDIR}/dotfiles/emacs.d/.elisp/
+# cd ${SETUPDIR}/dotfiles/emacs.d/.elisp/
 # (Need to setup MELPA :( )
-rm -rfv go-mode.el && git clone https://github.com/zafartahirov/go-mode.el.git
-rm -rfv markdown-mode && git clone git://jblevins.org/git/markdown-mode.git
+# rm -rfv go-mode.el && git clone https://github.com/zafartahirov/go-mode.el.git
+# rm -rfv markdown-mode && git clone git://jblevins.org/git/markdown-mode.git
 popd

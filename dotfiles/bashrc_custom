@@ -4,6 +4,9 @@
 # This file can have anything that is not included in .bashrc
 # Use this file for customization rather than global/environment setup
 
+# Options:
+shopt -s autocd                 # Enable auto-cd
+
 # Custom BIN paths:
 # PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 pathmunge ${HOME}/.local/bin
@@ -45,8 +48,8 @@ if [ "$(uname)" == "Darwin" ]; then
     alias Emacs='open -a /Applications/Emacs.app'
 
     # Setup scala directory for Mac OSX
-    pathmunge ${HOME}/Library/Scala
-    pathmunge ${HOME}/Library/Scala/bin
+	# pathmunge ${HOME}/Library/Scala
+    # pathmunge ${HOME}/Library/Scala/bin
     export PATH
 fi
 
