@@ -34,7 +34,7 @@ case $(uname -s) in
         brew install emacs --upgrade
         brew install aspell --upgrade
         brew install git --upgrade
-        
+
         ;;
     *) # Need to setup other installations here
         ;;
@@ -66,6 +66,13 @@ fi
 #     mv .emacs.d .emacs.d~
 # fi
 
+##################################################################
+# Change the C-h and C-?
+ln -svf ${SETUPDIR}/dotfiles/xmodmap ${HOME}/.xmodmap
+xmodmap ~/.xmodmap 
+stty erase 
+
+
 rm -v ${HOME}/.emacs.d
 rm -v ${HOME}/.screenrc
 rm -v ${HOME}/.bash_profile
@@ -73,27 +80,27 @@ rm -v ${HOME}/.bashrc*
 rm -v ${HOME}/.bash_colors
 
 echo -e "${INFO} Creating soft links"
-ln -sfv	${SETUPDIR}/dotfiles/screenrc		${HOME}/.screenrc
-ln -sfv	${SETUPDIR}/dotfiles/bash_profile	${HOME}/.bash_profile
-ln -sfv	${SETUPDIR}/dotfiles/bashrc		    ${HOME}/.bashrc
-ln -sfv	${SETUPDIR}/dotfiles/bashrc_custom	${HOME}/.bashrc_custom
+ln -sfv ${SETUPDIR}/dotfiles/screenrc           ${HOME}/.screenrc
+ln -sfv ${SETUPDIR}/dotfiles/bash_profile       ${HOME}/.bash_profile
+ln -sfv ${SETUPDIR}/dotfiles/bashrc             ${HOME}/.bashrc
+ln -sfv ${SETUPDIR}/dotfiles/bashrc_custom      ${HOME}/.bashrc_custom
 
 
-# ln -svf `which pygmentize-2.7`			${HOME}/bin/pygmentize  # Python highlighter
+# ln -svf `which pygmentize-2.7`                        ${HOME}/bin/pygmentize  # Python highlighter
 
 # Create basic MUTT setup if it doesn't exist:
 # if [ ! -f ${HOME}/.muttrc ]; then
 #     echo -e "${INFO} Creating basic MUTTRC"
 #     echo -e "${WARN} Please, modify it!"
-#     ln -sv ${SETUPDIR}/dotfiles/muttrc		${HOME}/.muttrc
+#     ln -sv ${SETUPDIR}/dotfiles/muttrc                ${HOME}/.muttrc
 # fi
 
 ##################################################################
 # Create color link:
-if [ "$(uname)" == "Darwin" ]; then	# Mac
-    ln -sfv	${SETUPDIR}/dotfiles/bash_colors_Darwin	${HOME}/.bash_colors
+if [ "$(uname)" == "Darwin" ]; then     # Mac
+    ln -sfv     ${SETUPDIR}/dotfiles/bash_colors_Darwin ${HOME}/.bash_colors
 else
-    ln -sfv	${SETUPDIR}/dotfiles/bash_colors_Linux	${HOME}/.bash_colors
+    ln -sfv     ${SETUPDIR}/dotfiles/bash_colors_Linux  ${HOME}/.bash_colors
 fi
 
 ##################################################################
@@ -105,8 +112,8 @@ fi
 mkdir ${HOME}/.git.OLD
 
 # move .gitignore:
-mv -fv 	${HOME}/.gitignore 			${HOME}/.git.OLD/
-ln -sv	${SETUPDIR}/dotfiles/gitignore		${HOME}/.gitignore
+mv -fv  ${HOME}/.gitignore                      ${HOME}/.git.OLD/
+ln -sv  ${SETUPDIR}/dotfiles/gitignore          ${HOME}/.gitignore
 
 # create .gitconfig:
 mv -v ${HOME}/.gitconfig ${HOME}/.git.OLD/
@@ -119,7 +126,7 @@ GITUSER="[user]
 \tname = \"\"
 \temail = \"\"
 [github]
-\tuser = 
+\tuser =
 \ttoken = "
 if [ ! -f ${HOME}/.gitconfig_user ]; then
     echo -e "${GITUSER}" > ${HOME}/.gitconfig_user
@@ -135,16 +142,20 @@ git_version=`git --version`
 
 ##################################################################
 # Setup Emacs:
-ln -sfv	${SETUPDIR}/dotfiles/emacs.d		${HOME}/.emacs.d
+# rm -rfv ${SETUPDIR}/dotfiles/emacs.d
+# mkdir ${SETUPDIR}/dotfiles/emacs.d
+ln -sfv ${SETUPDIR}/dotfiles/emacs.d            ${HOME}/.emacs.d
 # export PRELUDE_INSTALL_DIR="${HOME}/.emacs.d/" && \
 # export PRELUDE_URL="https://github.com/zafartahirov/prelude.git" && \
 # curl -L https://github.com/zafartahirov/prelude/raw/master/utils/installer.sh | sh
 # git clone https://github.com/hvesalai/sbt-mode.git ${HOME}/.emacs.d/.elisp/sbt-mode
-export PRELUDE_INSTALL_DIR="${HOME}/.emacs.d/" && \ 
+export PRELUDE_INSTALL_DIR="${SETUPDIR}/dotfiles/emacs.d" && \
 curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh    # Get the latest prelude
 
 # Get my own configuration for the prelude
 pushd .
+rm -rfv ${PRELUDE_INSTALL_DIR}/personal
+mkdir ${PRELUDE_INSTALL_DIR}/personal
 cd ${PRELUDE_INSTALL_DIR}/personal
 git init
 git remote add origin git@github.com:zafartahirov/prelude.git
@@ -189,10 +200,10 @@ ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-c++
 ln -svf ${HOME}/bin/colorgcc ${HOME}/bin/color-cc
 
 
-ln -svf	${SETUPDIR}/scripts/gpp		${HOME}/bin/gpp		# GPP tool (C++)
-ln -svf	${SETUPDIR}/scripts/githubInit	${HOME}/bin/githubInit	# GitHub initializer
-ln -svf ${SETUPDIR}/scripts/repo	${HOME}/bin/repo	# Android GIT wrapper
-ln -svf ${SETUPDIR}/scripts/fixGitPermissions	${HOME}/bin/fixGitPermissions
+ln -svf ${SETUPDIR}/scripts/gpp         ${HOME}/bin/gpp         # GPP tool (C++)
+ln -svf ${SETUPDIR}/scripts/githubInit  ${HOME}/bin/githubInit  # GitHub initializer
+ln -svf ${SETUPDIR}/scripts/repo        ${HOME}/bin/repo        # Android GIT wrapper
+ln -svf ${SETUPDIR}/scripts/fixGitPermissions   ${HOME}/bin/fixGitPermissions
 
 ##################################################################
 # Emacs pacakges

@@ -7,6 +7,9 @@
 # Options:
 shopt -s autocd                 # Enable auto-cd
 
+# make sure the C-h is working properly
+stty erase 
+
 # Custom BIN paths:
 # PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 pathmunge ${HOME}/.local/bin
@@ -28,6 +31,10 @@ export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxCxegedabagaced
 export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
+
+# Also change the terminal colors as well
+export TERM=xterm-256color
+
 
 # Change the aliases:
 alias cp='cp -rv'

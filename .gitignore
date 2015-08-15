@@ -1,7 +1,7 @@
 #*
 .#*
 nanorc
-dotfiles/emacs.d/*
+dotfiles/emacs.d
 
 dotfiles/muttrc
 
