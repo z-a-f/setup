@@ -144,7 +144,7 @@ git_version=`git --version`
 # Setup Emacs:
 # rm -rfv ${SETUPDIR}/dotfiles/emacs.d
 # mkdir ${SETUPDIR}/dotfiles/emacs.d
-ln -sfv ${SETUPDIR}/dotfiles/emacs.d            ${HOME}/.emacs.d
+
 # export PRELUDE_INSTALL_DIR="${HOME}/.emacs.d/" && \
 # export PRELUDE_URL="https://github.com/zafartahirov/prelude.git" && \
 # curl -L https://github.com/zafartahirov/prelude/raw/master/utils/installer.sh | sh
@@ -162,6 +162,8 @@ git remote add origin git@github.com:zafartahirov/prelude.git
 git pull origin master
 
 popd
+
+ln -sfv ${SETUPDIR}/dotfiles/emacs.d            ${HOME}/.emacs.d
 
 ##################################################################
 # Setup NANO:

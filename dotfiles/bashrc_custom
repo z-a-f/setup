@@ -1,3 +1,4 @@
+
 # .bashrc_custom file
 # By Zafar M. Takhirov (cc.rafaz@zafar.cc)
 #
@@ -14,6 +15,7 @@ stty erase 
 # PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 pathmunge ${HOME}/.local/bin
 pathmunge ${HOME}/bin
+pathmunge ${HOME}/.node/bin
 export PATH
 # Custom bin paths have to be BEFORE $PATH.
 # We want our scripts to have priority, right?
@@ -92,3 +94,7 @@ if [ "$(uname)" == "Darwin" ]; then
     # The next line enables bash completion for gcloud.
     source '/Applications/Code Development/Tools/SDKs/google-cloud-sdk/completion.bash.inc'
 fi
+
+
+# Export other stuff that you might need:
+export PATH="${HOME}/.node/bin:$PATH"
