@@ -62,10 +62,10 @@ pathmunge () {
 pathmunge /usr/bin		# Global bins
 pathmunge /usr/local/bin
 pathmunge /usr/local/sbin
-pathmunge /usr/local/heroku/bin # Heroku bins: https://toolbelt.heroku.com/standalone
+# pathmunge /usr/local/heroku/bin # Heroku bins: https://toolbelt.heroku.com/standalone
 # pathmunge /opt/local/sbin
 # pathmunge /opt/local/bin	# MACPORTS
-pathmunge /usr/texbin			# MacTeX bins
+# pathmunge /usr/texbin			# MacTeX bins
 export PATH
 
 # -----------------------------------
