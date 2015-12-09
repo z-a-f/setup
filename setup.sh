@@ -158,7 +158,7 @@ rm -rfv ${PRELUDE_INSTALL_DIR}/personal
 mkdir ${PRELUDE_INSTALL_DIR}/personal
 cd ${PRELUDE_INSTALL_DIR}/personal
 git init
-git remote add origin git@github.com:zafartahirov/prelude.git
+git remote add origin https://github.com/zafartahirov/prelude.git
 git pull origin master
 
 popd
