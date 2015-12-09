@@ -47,7 +47,7 @@ alias dog='highlight -O xterm256 --failsafe'
 # alias ec='emacsclient -c'
 alias emacsd='emacs --daemon'
 alias emax='emacsclient -t'
-al ekill="emacsclient -e '(kill-emacs)'"
+alias ekill="emacsclient -e '(kill-emacs)'"
 alias ls='ls -GFh'
 alias ll='ls -GFhal'
 alias mkdir='mkdir -pv'
@@ -92,6 +92,9 @@ export GRADLE_HOME='/opt/local/share/java/gradle'
 
 # Fixes and Bugs:
 # LANG=en_US.UTF8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Only on my MAC:
 if [ "$(uname)" == "Darwin" ]; then
