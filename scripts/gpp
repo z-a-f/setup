@@ -1,5 +1,27 @@
 #!/usr/bin/env bash
 
+USAGE="
+USAGE:
+%> gpp <source file name> [flags]
+
+* gpp is aliased to 
+'color-g++ -std=c++11 -lm -lc++ -ggdb -g -Wall'
+
+* Output
+gpp creates a binary file with extension .bin and having the same name as
+the <source file name>
+
+* <source file name>
+The extension of the <source file name> is optional, and will be assumed as .cpp
+
+* [flags]
+Note that the flags have to go after the filename. To see the list of
+the flags, plase read the manuals
+%> man clang
+%> man gcc
+%> man g++
+"
+
 COMP="g++"			# g++ is the best, as gcc fails :(
 ARGS=""
 ARGS="${ARGS} -std=c++11"	# Compiler version
@@ -33,6 +55,7 @@ if [[ ! -f ${fNameIn} || ${fNameIn}==${extension} ]]; then
 	fNameOut="${fNameIn%.*}"
     else
 	echo "File ${fNameIn} not found or extension not recognized"
+        echo "$USAGE"
 	exit
     fi
 fi
