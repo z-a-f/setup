@@ -48,12 +48,14 @@ alias dog='highlight -O xterm256 --failsafe'
 alias emacsd='emacs --daemon'
 alias emax='emacsclient -t'
 alias ekill="emacsclient -e '(kill-emacs)'"
+alias ff="grep -rnw '.' -e "
 alias ls='ls -GFh'
 alias ll='ls -GFhal'
 alias mkdir='mkdir -pv'
 alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
+
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
 
 
