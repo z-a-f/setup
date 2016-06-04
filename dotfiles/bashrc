@@ -225,7 +225,8 @@ export VISUAL='emacs -nw'
 # 2.4) grep options
 # GREP_OPTIONS is obsolet quick fix below
 export GREP_OPTIONS='--color=auto'
-alias grep="usr/bin/grep $GREP_OPTIONS"
+GREP_PATH=`which grep`
+alias grep="$GREP_PATH $GREP_OPTIONS"
 unset GREP_OPTIONS
 export GREP_COLOR='1;31' # green for matches
 
