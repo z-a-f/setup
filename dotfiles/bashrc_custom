@@ -9,7 +9,7 @@
 shopt -s autocd                 # Enable auto-cd
 
 # make sure the C-h is working properly
-stty erase 
+[[ $- == *i* ]] && stty erase 
 
 # Custom BIN paths:
 # PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
