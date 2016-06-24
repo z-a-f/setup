@@ -104,6 +104,8 @@ if [ "$(uname)" == "Darwin" ]; then
     source '/Applications/CodeDev/Tools/SDKs/google-cloud-sdk/path.bash.inc'
     # The next line enables bash completion for gcloud.
     source '/Applications/CodeDev/Tools/SDKs/google-cloud-sdk/completion.bash.inc'
+    # Some local exports:
+    export ANDROID_HOME=/Applications/CodeDev/Tools/SDKs/androidCurrent
     # Specify the MacTeX crap:
     pathmunge /Library/TeX/texbin
 fi
@@ -118,5 +120,9 @@ export PATH
 
 ## Start emacs daemon (testing):
 # emacs --daemon
-
-export ANDROID_HOME=/Applications/CodeDev/Tools/SDKs/androidCurrent
+    
+    
+if [ -f ~/.secretrc ]; then
+    echo -e "*INFO*, Loading secret configs"
+    source ~/.secretrc
+fi
