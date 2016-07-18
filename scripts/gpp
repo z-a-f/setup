@@ -27,7 +27,9 @@ ARGS=""
 ARGS="${ARGS} -std=c++11"	# Compiler version
 # ARGS="${ARGS} -stdlib=libstdc++"	# Standard lib to use
 ARGS="${ARGS} -lm"			# Attach libraries by default
-ARGS="${ARGS} -lc++"		# Attach libraries by default
+if [[ "$(uname)" == "Darwin" ]]; then
+    ARGS="${ARGS} -lc++"		# Attach libraries by default
+fi
 ARGS="${ARGS} -ggdb -g"		# Debugging
 ARGS="${ARGS} -Wall"		# Warnings and errors
 

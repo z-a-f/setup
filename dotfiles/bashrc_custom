@@ -110,19 +110,25 @@ if [ "$(uname)" == "Darwin" ]; then
     pathmunge /Library/TeX/texbin
 fi
 
+# Only on my Linux
+if [ "$(uname)" == "Linux" ]; then
+    pathmunge /opt/ActiveTcl-8.6/bin
+    MANPATH="/opt/ActiveTcl-8.6/man:${MANPATH}"
+fi
+
 
 # Export other stuff that you might need:
 # export PATH="${HOME}/.node/bin:$PATH"
 pathmunge ${HOME}/.node/bin
 
 export PATH
-
+export MANPATH
 
 ## Start emacs daemon (testing):
 # emacs --daemon
     
     
 if [ -f ~/.secretrc ]; then
-    echo -e "*INFO*, Loading secret configs"
+    [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
     source ~/.secretrc
 fi
