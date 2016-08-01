@@ -78,13 +78,14 @@ rm -v ${HOME}/.screenrc
 rm -v ${HOME}/.bash_profile
 rm -v ${HOME}/.bashrc*
 rm -v ${HOME}/.bash_colors
+rm -v ${HOME}/.tmux.conf
 
 echo -e "${INFO} Creating soft links"
 ln -sfv ${SETUPDIR}/dotfiles/screenrc           ${HOME}/.screenrc
 ln -sfv ${SETUPDIR}/dotfiles/bash_profile       ${HOME}/.bash_profile
 ln -sfv ${SETUPDIR}/dotfiles/bashrc             ${HOME}/.bashrc
 ln -sfv ${SETUPDIR}/dotfiles/bashrc_custom      ${HOME}/.bashrc_custom
-
+ln -sfv ${SETUPDIR}/dotfiles/tmux.conf		${HOME}/.tmux.conf
 
 # ln -svf `which pygmentize-2.7`                        ${HOME}/bin/pygmentize  # Python highlighter
 
