@@ -7,6 +7,7 @@
 
 # Options:
 shopt -s autocd                 # Enable auto-cd
+shopt -s globstar		# Enable stars in the path
 
 # make sure the C-h is working properly
 [[ $- == *i* ]] && stty erase 
@@ -100,12 +101,22 @@ export LC_ALL=en_US.UTF-8
 
 # Only on my MAC:
 if [ "$(uname)" == "Darwin" ]; then
-    # The next line updates PATH for the Google Cloud SDK.
-    source '/Applications/CodeDev/Tools/SDKs/google-cloud-sdk/path.bash.inc'
-    # The next line enables bash completion for gcloud.
-    source '/Applications/CodeDev/Tools/SDKs/google-cloud-sdk/completion.bash.inc'
+    ## Google Dev
+    SDKs="/Applications/CodeDev/Tools/SDKs"
+    GCloud="${SDKs}/google-cloud-sdk"
+    if [ -d "${GCloud}" ]; then
+       # The next line updates PATH for the Google Cloud SDK.
+       source '${GCloud}/path.bash.inc'
+       # The next line enables bash completion for gcloud.
+       source '${GCloud}/completion.bash.inc'
+    fi
+    ## Rails Dev
+    if which rbenv > /dev/null; then
+        eval "$(rbenv init -)"
+    fi
+    ## Exports -- note that just because they are exported doesn't mean they are installed
     # Some local exports:
-    export ANDROID_HOME=/Applications/CodeDev/Tools/SDKs/androidCurrent
+    export ANDROID_HOME=${SDKs}/androidCurrent
     # Specify the MacTeX crap:
     pathmunge /Library/TeX/texbin
 fi
@@ -126,9 +137,16 @@ export MANPATH
 
 ## Start emacs daemon (testing):
 # emacs --daemon
-    
+
+## If the virtualenvwrapper is installed, make sure it is sourced
+if [ -f `which virtualenvwrapper.sh` ]; then
+    source `which virtualenvwrapper.sh`
+fi
     
 if [ -f ~/.secretrc ]; then
     [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
     source ~/.secretrc
 fi
+
+## In case you are using iTerm, you might wanna use the shell integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
