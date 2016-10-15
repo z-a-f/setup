@@ -1,4 +1,3 @@
-
 # .bashrc_custom file
 # By Zafar M. Takhirov (cc.rafaz@zafar.cc)
 #
@@ -118,14 +117,14 @@ if [ "$(uname)" == "Darwin" ]; then
     # Some local exports:
     export ANDROID_HOME=${SDKs}/androidCurrent
     # Specify the MacTeX crap:
-    pathmunge /Library/TeX/texbin
+    # pathmunge /Library/TeX/texbin
 fi
 
 # Only on my Linux
-if [ "$(uname)" == "Linux" ]; then
-    pathmunge /opt/ActiveTcl-8.6/bin
-    MANPATH="/opt/ActiveTcl-8.6/man:${MANPATH}"
-fi
+# if [ "$(uname)" == "Linux" ]; then
+#     pathmunge /opt/ActiveTcl-8.6/bin
+#     MANPATH="/opt/ActiveTcl-8.6/man:${MANPATH}"
+# fi
 
 
 # Export other stuff that you might need:
@@ -138,14 +137,18 @@ export MANPATH
 ## Start emacs daemon (testing):
 # emacs --daemon
 
+
 ## If the virtualenvwrapper is installed, make sure it is sourced
 if [ -f `which virtualenvwrapper.sh` ]; then
-    source `which virtualenvwrapper.sh`
+    export WORKON_HOME=$HOME/.virtualenvs
+    export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
+    source `which virtualenvwrapper_lazy.sh`
+    # source `which virtualenvwrapper.sh`
 fi
-    
+
 if [ -f ~/.secretrc ]; then
     [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
-    source ~/.secretrc
+    source ~/.secretrc ## Place any private things, like API tokens here
 fi
 
 ## In case you are using iTerm, you might wanna use the shell integration
