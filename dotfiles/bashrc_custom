@@ -139,7 +139,7 @@ export MANPATH
 # emacs --daemon
 
 ## If the virtualenvwrapper is installed, make sure it is sourced
-if [ -f `which virtualenvwrapper.sh` ]; then
+if [ -x `which virtualenvwrapper.sh` ]; then
     source `which virtualenvwrapper.sh`
 fi
     
