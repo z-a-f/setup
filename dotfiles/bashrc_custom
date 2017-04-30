@@ -141,7 +141,7 @@ export MANPATH
 
 
 ## If the virtualenvwrapper is installed, make sure it is sourced
-if [ -f `which virtualenvwrapper.sh` ]; then
+if [ -f "`which virtualenvwrapper.sh`" ]; then
     export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/DevProjects
     export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
