@@ -156,3 +156,9 @@ fi
 
 ## In case you are using iTerm, you might wanna use the shell integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+## In case you are using Bash on Windows 10
+if [ -f ~/.bashrc_windows ]; then
+    [[ $- == *i* ]] && echo -e "*INFO*, Loading Bash on Windows Configuration"
+    source ~/.bashrc_windows
+fi
