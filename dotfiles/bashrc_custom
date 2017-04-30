@@ -39,6 +39,7 @@ export TERM=xterm-256color
 
 
 # Change the aliases:
+alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
 alias adbreset='adb kill-server && adb start-server'
 alias cp='cp -rv'
 # alias dog='highlight -O ansi --failsafe'
@@ -55,7 +56,7 @@ alias mkdir='mkdir -pv'
 alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
-
+alias tw='open -a /Applications/TextWrangler.app'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
 
 
@@ -129,7 +130,8 @@ fi
 
 # Export other stuff that you might need:
 # export PATH="${HOME}/.node/bin:$PATH"
-pathmunge ${HOME}/.node/bin
+# pathmunge ${HOME}/.node/bin
+export NODE_PATH=$(abspath `which node`/../../lib/node_modules)
 
 export PATH
 export MANPATH
@@ -141,6 +143,7 @@ export MANPATH
 ## If the virtualenvwrapper is installed, make sure it is sourced
 if [ -f `which virtualenvwrapper.sh` ]; then
     export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/DevProjects
     export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
     source `which virtualenvwrapper_lazy.sh`
     # source `which virtualenvwrapper.sh`

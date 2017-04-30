@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+# USAGE="
+# USAGE:
+# %> svg2pdf <file name> [options]
+
+# If no flags are provided, the conversion is done only to pdf. Also, '--export-area-drawing' is enabled by default
+
+# <file name>:
+#     The file name is mandatory, and has to be of type 'image/svg+xml'
+
+# [options]:
+#     -np | --no-pdf
+#         Do not output PDF
+#     -ps
+#         Output PS format
+#     -eps
+#         Ouput EPS format
+#     -png
+#         Ouput PNG format
+#     --area<parameters>
+#         Export using different area parameters. Available parameter:
+#           =x0:y0:x1:y1
+#           -page
+#           -drawing
+#           -snap
+#     -o <value> | --opacity=<value>
+#        Specify opacity level
+#     -dpi <value> | --dpi=<value>
+#        Specify DPI
+# "
+
+fNameIn=$1
+shift
+fNameOut="${fNameIn%.*}"
+
+# PDFflag='true'
+# PSflag='false'
+# EPSflag='false'
+# PNGflag='false'
+# area='-drawing'
+# opacity=0
+
+# while getopts 'npegA:o:d:' opt; do
+#     case $opt in
+#         n)
+#           PDFflag='false'
+#           ;;
+#         p)
+#           PSflag='true'
+#           ;;
+#         e)
+#           EPSflag='true'
+#           ;;
+#         g)
+#           PNGflag='true'
+#           ;;
+#         A)
+#           area="$OPTARG"
+#           ;;
+#         o)
+#             opacity=$OPTARG
+#             ;;
+#         d)
+#           dpi=$OPTARG
+#     esac
+# done
+
+
+
+
+if [[ ! -f ${fNameIn} ]]; then
+    echo "File ${fNameIn} not found!"
+    echo "$USAGE"
+    exit 0
+fi
+
+if [[ "`file ${fNameIn} -b --mime-type`" != "image/svg+xml" ]]; then
+    echo "Extension ${fNameIn##*.} not supported!"
+    echo "$USAGE"
+    exit 0
+fi
+
+inkscape --file=`pwd`/${fNameIn} --export-area-drawing --without-gui --export-pdf=`pwd`/${fNameOut}.pdf $1
+

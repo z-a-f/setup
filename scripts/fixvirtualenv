@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Use this script if Homebrew broke your virtualenv
+
+VIRTUALENVPATH=${WORKON_HOME}   # Replace with your var
+USAGE="`basename $0` [--all | env1 env2 ...]\n
+Arguments:
+\t--all\tTry fixing all of the environments (optional). This assumes all of the environments are installed under $VIRTUALENVPATH
+\tenvX\tList of environments to fix. Assumes no '--all'. Supports absolute paths
+"
+
+## Check if the directory is absolute or relative and it exists
+envs=""
+for arg in $@; do
+    if [[ "$arg" == "--all" ]]; then
+        envs=`ls -d ${VIRTUALENVPATH}/*/`
+        break
+    fi
+    if [[ "$arg" != /* ]]; then
+        arg="${VIRTUALENVPATH}/${arg}"
+    fi
+    envs="$envs $arg"
+done
+
+## Check directories
+for arg in $envs; do
+    if [ ! -d "${arg}" ]; then
+        echo -e "Environemnt $arg not found!"
+        echo -e "${USAGE}"
+        exit 1
+    fi
+done
+
+# Delete broken symlinks and recreate
+for env in $envs; do
+    find $env -type l -exec sh -c "file -b {} | grep -q ^broken" \; -delete
+    virtualenv $env
+done
+
+
+
+
+

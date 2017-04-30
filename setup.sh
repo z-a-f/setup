@@ -208,6 +208,12 @@ ln -svf ${SETUPDIR}/scripts/githubInit  ${HOME}/bin/githubInit  # GitHub initial
 ln -svf ${SETUPDIR}/scripts/repo        ${HOME}/bin/repo        # Android GIT wrapper
 ln -svf ${SETUPDIR}/scripts/fixGitPermissions   ${HOME}/bin/fixGitPermissions
 
+if [ "$(uname)" == "Darwin" ] && hash wmctrl; then
+    ln -svf ${SETUPDIR}/scripts/wmfix	${HOME}/bin/wmfix
+else
+    echo -e "${WARN} WMCTRL not installed. 'wmfix' is not symlinked!"
+fi
+
 ##################################################################
 # Emacs pacakges
 pushd .

@@ -251,10 +251,11 @@ export NODE_DISABLE_COLORS=1
 #     nvm use v0.10.12 &> /dev/null # silence nvm use; needed for rsync
 # fi
 
-if hash brew 2>/dev/null && [ -f $(brew --prefix)/opt/nvm.sh ] ; then
-    export NVM_DIR="${HOME}/.nvm}"
+# if hash brew 2>/dev/null && [ -f $(brew --prefix nvm)/opt/nvm.sh ] ; then
+if hash brew 2>/dev/null && [ -f /usr/local/opt/nvm/nvm.sh ] ; then
+    export NVM_DIR="${HOME}/.nvm"
     ## This is slow!!!
-    source "$(brew --prefix)/opt/nvm.sh"
+    source "/usr/local/opt/nvm/nvm.sh" &> /dev/null
 fi
 
 ## ------------------------------
