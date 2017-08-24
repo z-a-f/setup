@@ -158,11 +158,11 @@ fi
 # export PYTHONPATH="/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages:${PYTHONPATH}"
 
 ## If there is anaconda
-CONDALOCATION=`find ~ -path ~/anaconda* 2> /dev/null`
+CONDALOCATION=~/anaconda*
 if [ -d ${CONDALOCATION} ]; then
+    CONDALOCATION=`echo ${CONDALOCATION}`
     alias condasource="pathmunge ${CONDALOCATION}/bin;export PYTHONPATH=${CONDALOCATION}/lib/python2.7/site-packages:${PYTHONPATH}"
 fi
-
 
 if [ -f ~/.secretrc ]; then
     # [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
