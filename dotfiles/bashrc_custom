@@ -65,10 +65,7 @@ alias rm='rm -vi'
 alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
 alias tw='open -a /Applications/TextWrangler.app'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
-<<<<<<< HEAD
 alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
-=======
->>>>>>> e37c81a7350e1c43476d42aa4dff63198dad6fb4
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
