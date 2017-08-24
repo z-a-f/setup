@@ -4,6 +4,11 @@
 # This file can have anything that is not included in .bashrc
 # Use this file for customization rather than global/environment setup
 
+########################################################################################################
+## Libraries
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
+########################################################################################################
+
 # Options:
 shopt -s autocd                 # Enable auto-cd
 shopt -s globstar		# Enable stars in the path
@@ -15,8 +20,8 @@ shopt -s globstar		# Enable stars in the path
 # PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 pathmunge ${HOME}/.local/bin
 pathmunge ${HOME}/bin
-pathmunge ${HOME}/.node/bin
-export PATH
+test -e /usr/local/cuda && pathmunge /usr/local/cuda/bin
+# export PATH
 # Custom bin paths have to be BEFORE $PATH.
 # We want our scripts to have priority, right?
 
@@ -37,11 +42,11 @@ export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
 # Also change the terminal colors as well
 export TERM=xterm-256color
 
-
 # Change the aliases:
 alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
 alias adbreset='adb kill-server && adb start-server'
 alias cp='cp -rv'
+alias cppcheck='cppcheck --enable=all --inconclusive --std=posix --language=c++'
 # alias dog='highlight -O ansi --failsafe'
 alias dog='highlight -O xterm256 --failsafe'
 # alias et='emacsclient -t'
@@ -56,10 +61,9 @@ alias mkdir='mkdir -pv'
 alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
+alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
 alias tw='open -a /Applications/TextWrangler.app'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
-
-
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
@@ -68,7 +72,7 @@ if [ "$(uname)" == "Darwin" ]; then
     # Setup scala directory for Mac OSX
 	# pathmunge ${HOME}/Library/Scala
     # pathmunge ${HOME}/Library/Scala/bin
-    export PATH
+    # export PATH
 fi
 
 # If the computer is not Darwin:
@@ -127,18 +131,17 @@ fi
 #     MANPATH="/opt/ActiveTcl-8.6/man:${MANPATH}"
 # fi
 
-
 # Export other stuff that you might need:
-# export PATH="${HOME}/.node/bin:$PATH"
-# pathmunge ${HOME}/.node/bin
-export NODE_PATH=$(abspath `which node`/../../lib/node_modules)
 
-export PATH
-export MANPATH
+if [ -f "`which node`" ]; then
+    # export PATH="${HOME}/.node/bin:$PATH"
+    # pathmunge ${HOME}/.node/bin
+    export NODE_PATH=$(`which node`/../../lib/node_modules)
+    pathmunge ${HOME}/.node/bin
+fi
 
 ## Start emacs daemon (testing):
 # emacs --daemon
-
 
 ## If the virtualenvwrapper is installed, make sure it is sourced
 if [ -f "`which virtualenvwrapper.sh`" ]; then
@@ -149,16 +152,38 @@ if [ -f "`which virtualenvwrapper.sh`" ]; then
     # source `which virtualenvwrapper.sh`
 fi
 
+# export PYTHONHOME="/usr/local/lib/python2.7"
+# export PYTHONPATH="/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages:${PYTHONPATH}"
+
+## If there is anaconda
+CONDALOCATION=`find ~ -path ~/anaconda* 2> /dev/null`
+if [ -d ${CONDALOCATION} ]; then
+    alias condasource="pathmunge ${CONDALOCATION}/bin;export PYTHONPATH=${CONDALOCATION}/lib/python2.7/site-packages:${PYTHONPATH}"
+fi
+
+
 if [ -f ~/.secretrc ]; then
-    [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
+    # [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
     source ~/.secretrc ## Place any private things, like API tokens here
 fi
 
 ## In case you are using iTerm, you might wanna use the shell integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-## In case you are using Bash on Windows 10
-if [ -f ~/.bashrc_windows ]; then
-    [[ $- == *i* ]] && echo -e "*INFO*, Loading Bash on Windows Configuration"
-    source ~/.bashrc_windows
+## In case you are using Bash on a specific machine edit it below
+if [ -f ~/.bashrc_work_machine ]; then
+    # [[ $- == *i* ]] && echo -e "*INFO*, Loading more configurations"
+    source ~/.bashrc_work_machine
+    # [[ $- == *i* ]] && echo -e "*INFO*, To use ROS, run 'source_ros'"
+    # alias source_ros='source ~/.bashrc_ros'
+    # [[ $- == *i* ]] && echo -e "*INFO*, To use CuDNN, run 'source_cudnn'"
+    # alias source_cudnn='source ~/.bashrc_cudnn'
 fi
+
+### Final step, cleanup any duplicates in the environment variables (preserve order)
+alias path_cleanup="python -c \"import sys; from collections import OrderedDict; print ':'.join(list(OrderedDict.fromkeys(sys.argv[1].split(':'))))\""
+# PATH=`path_cleanup ${PATH}`
+
+### Final Final step, export all!
+export PATH
+export MANPATH

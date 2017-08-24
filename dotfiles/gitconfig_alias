@@ -43,6 +43,7 @@
 	#############
 	l = log --oneline
 	lg = log --oneline --graph --decorate
+	lgb = log --oneline --graph --decorate --branches
 	#############
 	ls = ls-files
 	lsf = "!git ls-files | grep -i"
