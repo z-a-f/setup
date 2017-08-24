@@ -13,7 +13,8 @@ shopt -s globstar		# Enable stars in the path
 
 # Custom BIN paths:
 # PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
-pathmunge ${HOME}/.local/bin
+# pathmunge ${HOME}/.local/bin
+PATH=${PATH}:${HOME}/.local/bin
 pathmunge ${HOME}/bin
 pathmunge ${HOME}/.node/bin
 export PATH
@@ -37,7 +38,6 @@ export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
 # Also change the terminal colors as well
 export TERM=xterm-256color
 
-
 # Change the aliases:
 alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
 alias adbreset='adb kill-server && adb start-server'
@@ -58,8 +58,7 @@ alias pig='pygmentize -g'
 alias rm='rm -vi'
 alias tw='open -a /Applications/TextWrangler.app'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
-
-
+alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
 
 # If the computer is Darwin:
 if [ "$(uname)" == "Darwin" ]; then
