@@ -136,12 +136,12 @@ fi
 
 # Export other stuff that you might need:
 
-if [ -f "`which node`" ]; then
-    # export PATH="${HOME}/.node/bin:$PATH"
-    # pathmunge ${HOME}/.node/bin
-    export NODE_PATH=$(`which node`/../../lib/node_modules)
-    pathmunge ${HOME}/.node/bin
-fi
+# if [ -f "`which node`" ]; then
+#     # export PATH="${HOME}/.node/bin:$PATH"
+#     # pathmunge ${HOME}/.node/bin
+#     export NODE_PATH=$(`which node`/../../lib/node_modules)
+#     pathmunge ${HOME}/.node/bin
+# fi
 
 ## Start emacs daemon (testing):
 # emacs --daemon
