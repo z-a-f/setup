@@ -17,6 +17,7 @@ shopt -s globstar		# Enable stars in the path
 [[ $- == *i* ]] && stty erase 
 
 # Custom BIN paths:
+## This will be included as a very last resort, and will hold only executables with the least priority: 
 # PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 # pathmunge ${HOME}/.local/bin
 PATH=${PATH}:${HOME}/.local/bin
