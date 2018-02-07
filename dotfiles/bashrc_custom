@@ -190,3 +190,4 @@ alias path_cleanup="python -c \"import sys; from collections import OrderedDict;
 ### Final Final step, export all!
 export PATH
 export MANPATH
+. /etc/profile.d/vte.sh
