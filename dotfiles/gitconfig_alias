@@ -28,6 +28,7 @@
 	dc = diff --cached
 	dl = difftool
 	dlc = difftool --cached
+        dld = difftool --dir-diff
 	dk = diff --check
 	dp = diff --patience
 	dck = diff --cached --check
@@ -40,10 +41,12 @@
 	fk = fsck
 	#############
 	g = grep -p
+	gin = grep -EIin
 	#############
 	l = log --oneline
 	lg = log --oneline --graph --decorate
 	lgb = log --oneline --graph --decorate --branches
+        lgp = log --oneline --graph --decorate --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	#############
 	ls = ls-files
 	lsf = "!git ls-files | grep -i"

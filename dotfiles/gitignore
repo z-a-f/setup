@@ -1,3 +1,4 @@
+
 # Compiled source #
 ###################
 *.com
@@ -46,3 +47,17 @@ Thumbs.db
 # Google Repo configuration #
 #############################
 .repo
+
+# Files that are specific to a machine #
+########################################
+.python-version
+
+# Local Voyager files #
+#######################
+calibration_car*old.yaml
+calibration_car*debug.yaml
+calibration_car*new.yaml
+car_*old_velodyne_*_calib.yaml
+car_*debug_velodyne_*_calib.yaml
+car_*new_velodyne_*_calib.yaml
+zafar.launch

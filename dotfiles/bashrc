@@ -10,7 +10,7 @@
 #    3) .bash_profile imports .bashrc, but not vice versa.
 #    4) .bashrc imports .bashrc_custom, which can be used to override
 #        variables specified here.
-#           
+#
 # When using GNU screen:
 #
 #    1) .bash_profile is loaded the first time you login, and should be used
@@ -45,8 +45,7 @@
 # 1.0.1) Safe PATH handling:
 pathmunge () {
     if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
-	# echo "Pushing $1"
-	PATH=$1:$PATH
+        PATH=$1:$PATH
     fi
 }
 
@@ -59,13 +58,13 @@ pathmunge () {
 # export PATH=/usr/local/bin:$PATH
 # export PATH=/usr/local/sbin:$PATH
 # export PATH=/usr/local/heroku/bin:$PATH # Heroku: https://toolbelt.heroku.com/standalone
-pathmunge /usr/bin		# Global bins
+pathmunge /usr/bin      # Global bins
 pathmunge /usr/local/bin
 pathmunge /usr/local/sbin
 # pathmunge /usr/local/heroku/bin # Heroku bins: https://toolbelt.heroku.com/standalone
 # pathmunge /opt/local/sbin
-# pathmunge /opt/local/bin	# MACPORTS
-# pathmunge /usr/texbin			# MacTeX bins
+# pathmunge /opt/local/bin  # MACPORTS
+# pathmunge /usr/texbin         # MacTeX bins
 export PATH
 
 # -----------------------------------
@@ -97,9 +96,9 @@ export PATH
 #  AND the user id is greater than 99, we're on the server, and set umask
 #  022 for easy collaborative editing.
 if [ "`id -gn`" == "`id -un`" -a `id -u` -gt 99 ]; then
-	umask 002
+    umask 002
 else
-	umask 022
+    umask 022
 fi
 
 # ---------------------------------------------------------
@@ -120,24 +119,24 @@ if [ "$PS1" ]; then
       fi
     fi
     case $TERM in
-	xterm*)
-		if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
-			PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
-		else
-	    	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
-		fi
-		;;
-	screen)
-		if [ -e /etc/sysconfig/bash-prompt-screen ]; then
-			PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
-		else
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\033\\"'
-		fi
-		;;
-	*)
-		[ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
+    xterm*)
+        if [ -e /etc/sysconfig/bash-prompt-xterm ]; then
+            PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
+        else
+            PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
+        fi
+        ;;
+    screen)
+        if [ -e /etc/sysconfig/bash-prompt-screen ]; then
+            PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
+        else
+        PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\033\\"'
+        fi
+        ;;
+    *)
+        [ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
 
-	    ;;
+        ;;
     esac
 
     # Bash eternal history
@@ -177,10 +176,10 @@ if [ "$PS1" ]; then
 
     if [ "x$SHLVL" != "x1" ]; then # We're not a login shell
         for i in /etc/profile.d/*.sh; do
-	    if [ -r "$i" ]; then
-	        . $i
-	    fi
-	done
+            if [ -r "$i" ]; then
+                . $i
+            fi
+        done
     fi
 fi
 
@@ -271,7 +270,8 @@ if [ -f ~/.bashrc_custom ]; then
     # echo -e "*INFO*, Loading custom .bashrc"
     source ~/.bashrc_custom
 fi
-export PATH=~/CRClientTools/arcanist/bin:$PATH;
-export ARCDIR=~/CRClientTools/arcanist/bin;
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:$LD_LIBRARY_PATH
-export PATH=/usr/local/cuda-9.0/bin:$PATH
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
