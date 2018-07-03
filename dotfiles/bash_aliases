@@ -1,0 +1,30 @@
+
+alias ..="cd .."
+alias ...="cd..; cd .."
+
+set -o noclobber
+
+# Change the aliases:
+alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
+alias adbreset='adb kill-server && adb start-server'
+alias cp='cp -rv'
+alias cppcheck='cppcheck --enable=all --inconclusive --std=posix --language=c++'
+alias dog='highlight -O xterm256 --failsafe'
+alias du='du -ch -d 1'
+alias ekill="emacsclient -e '(kill-emacs)'"
+alias em='emacs -nw'     # No X11 windows
+alias emacsd='emacs --daemon'
+alias emax='emacsclient -t'
+alias eqq='emacs -nw -Q' # No config and no X11
+alias ff="grep -rnw '.' -e "
+alias ls='ls -GFh --color'
+alias ll='ls -GFhal --color'
+alias mkdir='mkdir -pv'
+alias mv="mv -i"
+alias nano='nano -c'
+alias pig='pygmentize -g'
+alias rm='rm -vi'
+alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
+alias tw='open -a /Applications/TextWrangler.app'
+alias valgrind='valgrind --leak-check=full --tool=memcheck'
+alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'

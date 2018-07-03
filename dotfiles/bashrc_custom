@@ -38,35 +38,35 @@ export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
 # Also change the terminal colors as well
 export TERM=xterm-256color
 
-# Change the aliases:
-alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
-alias adbreset='adb kill-server && adb start-server'
-alias cp='cp -rv'
-alias cppcheck='cppcheck --enable=all --inconclusive --std=posix --language=c++'
-# alias dog='highlight -O ansi --failsafe'
-alias dog='highlight -O xterm256 --failsafe'
-# alias et='emacsclient -t'
-# alias ec='emacsclient -c'
-alias emacsd='emacs --daemon'
-alias emax='emacsclient -t'
-alias ekill="emacsclient -e '(kill-emacs)'"
-alias ff="grep -rnw '.' -e "
-alias ls='ls -GFh'
-alias ll='ls -GFhal'
-alias mkdir='mkdir -pv'
-alias nano='nano -c'
-alias pig='pygmentize -g'
-alias rm='rm -vi'
-alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
-alias tw='open -a /Applications/TextWrangler.app'
-alias valgrind='valgrind --leak-check=full --tool=memcheck'
-alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
+# # Change the aliases:
+# alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
+# alias adbreset='adb kill-server && adb start-server'
+# alias cp='cp -rv'
+# alias cppcheck='cppcheck --enable=all --inconclusive --std=posix --language=c++'
+# # alias dog='highlight -O ansi --failsafe'
+# alias dog='highlight -O xterm256 --failsafe'
+# # alias et='emacsclient -t'
+# # alias ec='emacsclient -c'
+# alias emacsd='emacs --daemon'
+# alias emax='emacsclient -t'
+# alias ekill="emacsclient -e '(kill-emacs)'"
+# alias ff="grep -rnw '.' -e "
+# alias ls='ls -GFh'
+# alias ll='ls -GFhal'
+# alias mkdir='mkdir -pv'
+# alias nano='nano -c'
+# alias pig='pygmentize -g'
+# alias rm='rm -vi'
+# alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
+# alias tw='open -a /Applications/TextWrangler.app'
+# alias valgrind='valgrind --leak-check=full --tool=memcheck'
+# alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
 
-# If the computer is not Darwin:
-if [ "$(uname)" != "Darwin" ]; then
-    alias ls='ls --color -GFh'
-    alias ll='ls --color -GFhal'
-fi
+# # If the computer is not Darwin:
+# if [ "$(uname)" != "Darwin" ]; then
+#     alias ls='ls --color -GFh'
+#     alias ll='ls --color -GFhal'
+# fi
 
 # Custom functions:
 #githubInit() {
@@ -76,9 +76,9 @@ fi
 #}     # Create GITHUB repo from terminal
 
 # mans() { man $1 | grep -iC2 --color=always $2 | less }		# Search in MANPAGE
-mcd() { mkdir -pv "$1" && cd "$1"; }		# Make directory and cd there
-ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
-rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
+# mcd() { mkdir -pv "$1" && cd "$1"; }		# Make directory and cd there
+# ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
+# rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
 # User Environment Variables:
 
@@ -99,13 +99,6 @@ if [ -f "`which virtualenvwrapper.sh`" ]; then
     # source `which virtualenvwrapper.sh`
 fi
 
-## If there is anaconda
-CONDALOCATION=~/anaconda*
-if [ -d ${CONDALOCATION} ]; then
-    CONDALOCATION=`echo ${CONDALOCATION}`
-    alias condasource="pathmunge ${CONDALOCATION}/bin;export PYTHONPATH=${CONDALOCATION}/lib/python2.7/site-packages:${PYTHONPATH}"
-fi
-
 if [ -f ~/.secretrc ]; then
     # [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
     source ~/.secretrc ## Place any private things, like API tokens here
@@ -116,12 +109,7 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 
 ## In case you are using Bash on a specific machine edit it below
 if [ -f ~/.bashrc_work_machine ]; then
-    # [[ $- == *i* ]] && echo -e "*INFO*, Loading more configurations"
     source ~/.bashrc_work_machine
-    # [[ $- == *i* ]] && echo -e "*INFO*, To use ROS, run 'source_ros'"
-    # alias source_ros='source ~/.bashrc_ros'
-    # [[ $- == *i* ]] && echo -e "*INFO*, To use CuDNN, run 'source_cudnn'"
-    # alias source_cudnn='source ~/.bashrc_cudnn'
 fi
 
 ### Final step, cleanup any duplicates in the environment variables (preserve order)
