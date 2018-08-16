@@ -1,4 +1,5 @@
 
+
 # Compiled source #
 ###################
 *.com
@@ -51,6 +52,7 @@ Thumbs.db
 # Files that are specific to a machine #
 ########################################
 .python-version
+.envrc
 
 # Local Voyager files #
 #######################

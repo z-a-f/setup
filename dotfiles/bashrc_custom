@@ -1,12 +1,24 @@
+# echo ".BASHRC_CUSTOM"
 # .bashrc_custom file
 # By Zafar M. Takhirov (cc.rafaz@zafar.cc)
 #
 # This file can have anything that is not included in .bashrc
 # Use this file for customization rather than global/environment setup
 
+## Bug fix for CHROOT, where the environment is not read
+pathmunge /usr/local/games
+pathmunge /usr/games
+pathmunge /bin
+pathmunge /sbin
+pathmunge /usr/bin
+pathmunge /usr/sbin
+pathmunge /usr/local/bin
+pathmunge /usr/local/sbin
+export LC_ALL=en_US.UTF-8
+
 ########################################################################################################
 ## Libraries
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64
+# test -e /usr/local/cuda && export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64
 ########################################################################################################
 
 # Options:
@@ -18,9 +30,6 @@ shopt -s globstar		# Enable stars in the path
 
 # Custom BIN paths:
 ## This will be included as a very last resort, and will hold only executables with the least priority: 
-# PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
-# pathmunge ${HOME}/.local/bin
-# PATH=${PATH}:${HOME}/.local/bin
 pathmunge ${HOME}/bin
 test -e /usr/local/cuda && pathmunge /usr/local/cuda/bin
 
@@ -28,7 +37,12 @@ test -e /usr/local/cuda && pathmunge /usr/local/cuda/bin
 # We want our scripts to have priority, right?
 
 # Change the prompt:
-export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\]\n\$> "
+if [ -f "${HOME}/.bash_prompt" ]; then
+    source ${HOME}/.bash_prompt
+else
+    export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\]\n\$> "
+    source /etc/profile.d/vte.sh
+fi
 
 # Setup better colors:
 export CLICOLOR=1
@@ -37,48 +51,6 @@ export LS_COLORS="di=01;33:ln=04;35:or=5;37;41:so=33:ex=00;32"
 
 # Also change the terminal colors as well
 export TERM=xterm-256color
-
-# # Change the aliases:
-# alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
-# alias adbreset='adb kill-server && adb start-server'
-# alias cp='cp -rv'
-# alias cppcheck='cppcheck --enable=all --inconclusive --std=posix --language=c++'
-# # alias dog='highlight -O ansi --failsafe'
-# alias dog='highlight -O xterm256 --failsafe'
-# # alias et='emacsclient -t'
-# # alias ec='emacsclient -c'
-# alias emacsd='emacs --daemon'
-# alias emax='emacsclient -t'
-# alias ekill="emacsclient -e '(kill-emacs)'"
-# alias ff="grep -rnw '.' -e "
-# alias ls='ls -GFh'
-# alias ll='ls -GFhal'
-# alias mkdir='mkdir -pv'
-# alias nano='nano -c'
-# alias pig='pygmentize -g'
-# alias rm='rm -vi'
-# alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
-# alias tw='open -a /Applications/TextWrangler.app'
-# alias valgrind='valgrind --leak-check=full --tool=memcheck'
-# alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
-
-# # If the computer is not Darwin:
-# if [ "$(uname)" != "Darwin" ]; then
-#     alias ls='ls --color -GFh'
-#     alias ll='ls --color -GFhal'
-# fi
-
-# Custom functions:
-#githubInit() {
-#  curl -u '$1' https://api/github.com/user/repos -d '{"name":"$2"}'
-#  git remote add origin git@github.com:$1/$2.git
-#  git push origin master
-#}     # Create GITHUB repo from terminal
-
-# mans() { man $1 | grep -iC2 --color=always $2 | less }		# Search in MANPAGE
-# mcd() { mkdir -pv "$1" && cd "$1"; }		# Make directory and cd there
-# ql () { qlmanage -p "$*" >& /dev/null; }		# Quick look
-# rmtild () { find . -name "*.*~" | xargs rm -vf; }		# Remove temporary files
 
 # User Environment Variables:
 
@@ -96,7 +68,6 @@ if [ -f "`which virtualenvwrapper.sh`" ]; then
     export PROJECT_HOME=$HOME/DevProjects
     export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
     source `which virtualenvwrapper_lazy.sh`
-    # source `which virtualenvwrapper.sh`
 fi
 
 if [ -f ~/.secretrc ]; then
@@ -104,8 +75,12 @@ if [ -f ~/.secretrc ]; then
     source ~/.secretrc ## Place any private things, like API tokens here
 fi
 
-## In case you are using iTerm, you might wanna use the shell integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# PyENV
+if ! ischroot ; then
+    export PYENV_ROOT="${HOME}/.pyenv"
+    pathmunge ${PYENV_ROOT}/bin
+    eval "$(pyenv init -)"
+fi
 
 ## In case you are using Bash on a specific machine edit it below
 if [ -f ~/.bashrc_work_machine ]; then
@@ -114,9 +89,9 @@ fi
 
 ### Final step, cleanup any duplicates in the environment variables (preserve order)
 alias path_cleanup="python -c \"import sys; from collections import OrderedDict; print ':'.join(list(OrderedDict.fromkeys(sys.argv[1].split(':'))))\""
-# PATH=`path_cleanup ${PATH}`
 
 ### Final Final step, export all!
 export PATH
 export MANPATH
-. /etc/profile.d/vte.sh
+
+test `which direnv` && eval "$(direnv hook bash)"

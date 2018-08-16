@@ -30,10 +30,10 @@
 	added = green bold
 	changed = yellow bold
 	untracked = red bold
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
+# [diff]
+# 	tool = vimdiff
+# [difftool]
+# 	prompt = false
 [gitflow "prefix"]
 	feature = feature-
 	release = release-

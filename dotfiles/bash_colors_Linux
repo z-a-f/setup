@@ -33,7 +33,7 @@ UPurple='\e[4;35m'      # Purple
 UCyan='\e[4;36m'        # Cyan
 UWhite='\e[4;37m'       # White
 
-# Background
+# Backgrounod
 On_Black='\e[40m'       # Black
 On_Red='\e[41m'         # Red
 On_Green='\e[42m'       # Green

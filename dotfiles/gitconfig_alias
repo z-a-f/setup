@@ -46,7 +46,7 @@
 	l = log --oneline
 	lg = log --oneline --graph --decorate
 	lgb = log --oneline --graph --decorate --branches
-        lgp = log --oneline --graph --decorate --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  lgp = log --oneline --graph --decorate --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	#############
 	ls = ls-files
 	lsf = "!git ls-files | grep -i"
@@ -58,6 +58,8 @@
 	#############
 	o = checkout
 	ob = checkout -b
+	#############
+  permission-reset = !git diff -p -R --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
 	#############
 	pr = prune -v
 	#############
