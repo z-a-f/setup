@@ -171,15 +171,10 @@ ln -sfv ${SETUPDIR}/dotfiles/emacs.d            ${HOME}/.emacs.d
 rm -v ${HOME}/.nanorc
 # Install NANO colors:
 echo -e "${INFO} Setting up NANO"
-cd ${SETUPDIR}
-if [ ! -d nanorc ]; then
-    git clone https://github.com/nanorc/nanorc.git
-fi
+cd ${SETUPDIR}/nanorc
 cd nanorc
-make install
-echo 'include ~/.nano/syntax/ALL.nanorc' > ~/.nanorc
-# rm -rf ${SETUPDIR}/nanorc
-
+make
+echo "include ${SETUPDIR}/nanorc/build/ALL.nanorc" > ~/.nanorc
 
 ##################################################################
 # Setup scripts:
