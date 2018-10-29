@@ -7,7 +7,7 @@ set -o noclobber
 # Change the aliases:
 alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
 alias adbreset='adb kill-server && adb start-server'
-alias cp='cp -rv'
+alias cp='cp -rvi'
 alias cppcheck='cppcheck --enable=all --inconclusive --std=posix --language=c++'
 alias dog='highlight -O xterm256 --failsafe'
 alias du='du -ch -d 1'
