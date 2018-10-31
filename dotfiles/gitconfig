@@ -1,43 +1,52 @@
 [include]
-	path = ~/.gitconfig_user
-	path = gitconfig_alias
+  path = ~/.gitconfig_user
+  path = gitconfig_alias
 [core]
-	editor = emacs
-	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	excludesfile = ~/.gitignore
+  editor = emacs
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile = ~/.gitignore
+  attributesfile = gitattributes_global
 [web]
-	browser = google-chrome
+  browser = google-chrome
 [instaweb]
-	httpd = apache2 -f
+  httpd = apache2 -f
 [rerere]
-	enabled = 1
-	autoupdate = 1
+  enabled = 1
+  autoupdate = 1
 [push]
-	default = simple
+  default = simple
 [color]
-	ui = auto
+  ui = auto
 [color "branch"]
-	current = yellow bold
-	local = green bold
-	remote = cyan bold
+  current = yellow bold
+  local = green bold
+  remote = cyan bold
 [color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
 [color "status"]
-	added = green bold
-	changed = yellow bold
-	untracked = red bold
+  added = green bold
+  changed = yellow bold
+  untracked = red bold
 # [diff]
 # 	tool = vimdiff
 # [difftool]
 # 	prompt = false
 [gitflow "prefix"]
-	feature = feature-
-	release = release-
-	hotfix = hotfix-
-	support = support-
-	versiontag = v
-
+  feature = feature-
+  release = release-
+  hotfix = hotfix-
+  support = support-
+  versiontag = v
+[filter "nbstrip_full"]
+  clean = "jq --indent 1 \
+           '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
+            | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
+            | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
+            | .cells[].metadata = {} \
+           '"
+  smudge = cat
+  required = true
