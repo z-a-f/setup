@@ -1,0 +1,12 @@
+" Set the tabs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+" Remappings
+
+" Detab in command mode 
+nnoremap <S-Tab> <<
+" Detab in editor mode (was <C-d>)
+inoremap <S-Tab> <C-d>
