@@ -29,7 +29,7 @@ shopt -s globstar		# Enable stars in the path
 [[ $- == *i* ]] && stty erase 
 
 # Custom BIN paths:
-## This will be included as a very last resort, and will hold only executables with the least priority: 
+## This will be included as a very last resort, and will hold only executables with the least priority:
 pathmunge ${HOME}/bin
 test -e /usr/local/cuda && pathmunge /usr/local/cuda/bin
 
@@ -38,14 +38,14 @@ test -e /usr/local/cuda && pathmunge /usr/local/cuda/bin
 
 # Change the prompt:
 if [ -f "${HOME}/.bash_prompt" ]; then
-    source ${HOME}/.bash_prompt
+  source ${HOME}/.bash_prompt
 else
-    export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\]\n\$> "
-    source /etc/profile.d/vte.sh
+  export PS1="\[${Color_Off}${BICyan}\u${White}@${BIGreen}\h${White}:${BIYellow}\W${Color_Off}\]\n\$> "
+  source /etc/profile.d/vte.sh
 fi
 
 if [ -f "${HOME}/.bash_aliases" ]; then
-    source ${HOME}/.bash_aliases
+  source ${HOME}/.bash_aliases
 fi
 
 # Setup better colors:
@@ -68,27 +68,27 @@ export LC_ALL=en_US.UTF-8
 
 ## If the virtualenvwrapper is installed, make sure it is sourced
 if [ -f "`which virtualenvwrapper.sh`" ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    export PROJECT_HOME=$HOME/DevProjects
-    export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
-    source `which virtualenvwrapper_lazy.sh`
+  export WORKON_HOME=$HOME/.virtualenvs
+  export PROJECT_HOME=$HOME/DevProjects
+  export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
+  source `which virtualenvwrapper_lazy.sh`
 fi
 
 if [ -f ~/.secretrc ]; then
-    # [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
-    source ~/.secretrc ## Place any private things, like API tokens here
+  # [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
+  source ~/.secretrc ## Place any private things, like API tokens here
 fi
 
 # PyENV
-if ! ischroot ; then
-    export PYENV_ROOT="${HOME}/.pyenv"
-    pathmunge ${PYENV_ROOT}/bin
-    eval "$(pyenv init -)"
-fi
+# if ! ischroot ; then
+#   export PYENV_ROOT="${HOME}/.pyenv"
+#   pathmunge ${PYENV_ROOT}/bin
+#   eval "$(pyenv init -)"
+# fi
 
 ## In case you are using Bash on a specific machine edit it below
 if [ -f ~/.bashrc_work_machine ]; then
-    source ~/.bashrc_work_machine
+  source ~/.bashrc_work_machine
 fi
 
 ### Final step, cleanup any duplicates in the environment variables (preserve order)
