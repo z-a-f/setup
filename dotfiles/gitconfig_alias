@@ -1,6 +1,7 @@
 [alias]
 	a = add .
 	ai = add -i
+	acm = !git add . && git commit -m
 	#############
 	ap = apply
 	as = apply --stat
@@ -28,7 +29,7 @@
 	dc = diff --cached
 	dl = difftool
 	dlc = difftool --cached
-        dld = difftool --dir-diff
+  dld = difftool --dir-diff
 	dk = diff --check
 	dp = diff --patience
 	dck = diff --cached --check
@@ -152,6 +153,5 @@
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 
 	#############
-	acm = !git add . && git commit -m
 	send = !git add . && git commit -m "\"Minor Change (`whoami`): $(date)\"" && git push
 
