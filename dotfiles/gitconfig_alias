@@ -153,5 +153,5 @@
 
 	#############
 	acm = !git add . && git commit -m
-	send = !git add . && git commit -m "\"AUTOCOMMIT(`whoami`): $(date)\"" && git push
-	
+	send = !git add . && git commit -m "\"Minor Change (`whoami`): $(date)\"" && git push
+

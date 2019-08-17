@@ -31,6 +31,7 @@ shopt -s globstar		# Enable stars in the path
 # Custom BIN paths:
 ## This will be included as a very last resort, and will hold only executables with the least priority: 
 pathmunge ${HOME}/bin
+pathmunge ${HOME}/.local/bin
 test -e /usr/local/cuda && pathmunge /usr/local/cuda/bin
 
 # Custom bin paths have to be BEFORE $PATH.
@@ -87,9 +88,12 @@ if ! ischroot ; then
 fi
 
 ## In case you are using Bash on a specific machine edit it below
-if [ -f ~/.bashrc_work_machine ]; then
-    source ~/.bashrc_work_machine
+if [ -f ~/.bashrc_my_machine ]; then
+    source ~/.bashrc_my_machine
 fi
+
+## IntelliJ Idea
+# pathmunge ${HOME}/IntelliJ/bin
 
 ### Final step, cleanup any duplicates in the environment variables (preserve order)
 alias path_cleanup="python -c \"import sys; from collections import OrderedDict; print ':'.join(list(OrderedDict.fromkeys(sys.argv[1].split(':'))))\""

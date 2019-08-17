@@ -17,6 +17,7 @@ alias emacsd='emacs --daemon'
 alias emax='emacsclient -t'
 alias eqq='emacs -nw -Q' # No config and no X11
 alias ff="grep -rnw '.' -e "
+alias kotl="kotlinc-jfvm"
 alias ls='ls -GFh --color'
 alias ll='ls -GFhal --color'
 alias mkdir='mkdir -pv'
@@ -28,3 +29,6 @@ alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
 alias tw='open -a /Applications/TextWrangler.app'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
 alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
+
+alias gclogin='gcloud auth application-default login'
+
