@@ -16,6 +16,10 @@ pathmunge /usr/local/bin
 pathmunge /usr/local/sbin
 export LC_ALL=en_US.UTF-8
 
+pathmunge_front $HOME/.brew/bin
+pathmunge_front $HOME/.brew/sbin
+BREW_PREFIX=$(brew --prefix)
+
 ########################################################################################################
 ## Libraries
 # test -e /usr/local/cuda && export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64
@@ -31,7 +35,6 @@ shopt -s globstar		# Enable stars in the path
 # Custom BIN paths:
 ## This will be included as a very last resort, and will hold only executables with the least priority:
 pathmunge ${HOME}/bin
-test -e /usr/local/cuda && pathmunge /usr/local/cuda/bin
 
 # Custom bin paths have to be BEFORE $PATH.
 # We want our scripts to have priority, right?
@@ -66,19 +69,6 @@ export LC_ALL=en_US.UTF-8
 
 # Export other stuff that you might need:
 
-## If the virtualenvwrapper is installed, make sure it is sourced
-if [ -f "`which virtualenvwrapper.sh`" ]; then
-  export WORKON_HOME=$HOME/.virtualenvs
-  export PROJECT_HOME=$HOME/DevProjects
-  export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
-  source `which virtualenvwrapper_lazy.sh`
-fi
-
-if [ -f ~/.secretrc ]; then
-  # [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
-  source ~/.secretrc ## Place any private things, like API tokens here
-fi
-
 # PyENV
 # if ! ischroot ; then
 #   export PYENV_ROOT="${HOME}/.pyenv"
@@ -86,10 +76,39 @@ fi
 #   eval "$(pyenv init -)"
 # fi
 
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+# ## If the virtualenvwrapper is installed, make sure it is sourced
+# # if [ -f "`which virtualenvwrapper.sh`" ]; then
+#   export WORKON_HOME=$HOME/.virtualenvs
+#   export PROJECT_HOME=$HOME/DevProjects
+#   eval "$(pyenv init -)"
+#   eval "$(pyenv virtualenv-init -)"
+#   # export VIRTUALENVWRAPPER_SCRIPT=`which virtualenvwrapper.sh`
+#   # if [ -f "`which pyenv`" ]; then
+#   #   export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+#   #   export VIRTUALENVWRAPPER_PYTHON="`pyenv which python`"
+#   #   if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#   #   eval "$(pyenv virtualenv-init -)" 
+#   # fi
+#   # source "`which virtualenvwrapper_lazy.sh`"
+# # fi
+
+if [ -f ~/.secretrc ]; then
+  # [[ $- == *i* ]] && echo -e "*INFO*, Loading secret configs"
+  source ~/.secretrc ## Place any private things, like API tokens here
+fi
+
+
 ## In case you are using Bash on a specific machine edit it below
 if [ -f ~/.bashrc_work_machine ]; then
   source ~/.bashrc_work_machine
 fi
+
+# export C_INCLUDE_PATH=$(brew --prefix libomp)/include:$C_INCLUDE_PATH
+# export CPLUS_INCLUDE_PATH=$(brew --prefix libomp)/include:$CPLUS_INCLUDE_PATH
+# export LIBRARY_PATH=$(brew --prefix libomp)/lib:$LIBRARY_PATH
+export LDFLAGS="-L$(brew --prefix)/opt/llvm/lib -Wl,-rpath,$(brew --prefix)/opt/llvm/lib ${LDFLAGS}"
 
 ### Final step, cleanup any duplicates in the environment variables (preserve order)
 alias path_cleanup="python -c \"import sys; from collections import OrderedDict; print ':'.join(list(OrderedDict.fromkeys(sys.argv[1].split(':'))))\""

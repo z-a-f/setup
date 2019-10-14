@@ -1,5 +1,6 @@
 [alias]
 	a = add .
+	acm = !git add . && git commit -m
 	ai = add -i
 	#############
 	ap = apply
@@ -28,7 +29,7 @@
 	dc = diff --cached
 	dl = difftool
 	dlc = difftool --cached
-        dld = difftool --dir-diff
+  dld = difftool --dir-diff
 	dk = diff --check
 	dp = diff --patience
 	dck = diff --cached --check
@@ -123,6 +124,10 @@
 	ss = stash save
 	sw = stash show
 	#############
+	subinit = submodule update --init --recursive
+	subpull = !git submodule foreach git pull --tags origin master
+	subrepo = !sh -c 'filter-branch --prune-empty --subdirectory-filter $1 master' -
+	#############
 	w = show
 	wp = show -p
 	wr = show -p --no-color
@@ -145,13 +150,9 @@
 	#############
 	barebranch = !sh -c 'git symbolic-ref HEAD refs/heads/$1 && git rm --cached -r . && git clean -xfd' -
 	flat = clone --depth 1
-	subpull = !git submodule foreach git pull --tags origin master
-	subrepo = !sh -c 'filter-branch --prune-empty --subdirectory-filter $1 master' -
 	human = name-rev --name-only --refs=refs/heads/*
-	serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+	# serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-
 	#############
-	acm = !git add . && git commit -m
-	send = !git add . && git commit -m "\"AUTOCOMMIT(`whoami`): $(date)\"" && git push
-	
+	send = !git add . && git commit -m "\"MINOR CHANGE (`whoami`): $(date)\"" && git push
+
