@@ -82,11 +82,36 @@ fi
 
 # PyENV
 if ! ischroot ; then
-    export PYENV_ROOT="${HOME}/.pyenv"
-    pathmunge ${PYENV_ROOT}/bin
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+    PYENV_ROOT="${HOME}/.pyenv"
+    if [ -d ${PYENV_ROOT} ]; then
+        export PYENV_ROOT
+        pathmunge "${PYENV_ROOT}/bin"
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+    fi
 fi
+
+# Conda
+CONDA_ROOT="${HOME}/miniconda3"
+if [ -d "${CONDA_ROOT}" ]; then
+    export CONDA_ROOT
+    source ${CONDA_ROOT}/bin/activate
+    # conda init
+    __conda_setup="$(${CONDA_ROOT}'/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]; then
+            . "${CONDA_ROOT}/etc/profile.d/conda.sh"
+        else
+            # export PATH="${CONDA_ROOT}/bin:$PATH"
+            pathmunge "${CONDA_ROOT}/bin"
+        fi
+    fi
+    eval "$(register-python-argcomplete conda)"
+    unset __conda_setup
+fi
+
 
 ## In case you are using Bash on a specific machine edit it below
 if [ -f ~/.bashrc_my_machine ]; then

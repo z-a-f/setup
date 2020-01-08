@@ -103,11 +103,19 @@ function set_prompt_symbol () {
 }
 
 # Determine active Python virtualenv details.
-function set_virtualenv () {
+function set_pyenv_version () {
   if [[ `pyenv version-name` == "system" ]] ; then
-      PYTHON_VIRTUALENV=""
+    PYENV_VERSION=""
   else
-      PYTHON_VIRTUALENV="${BLUE}[`pyenv version-name`]${COLOR_NONE} "
+    PYENV_VERSION="${BLUE}[`pyenv version-name`]${COLOR_NONE} "
+  fi
+}
+
+function set_conda_version () {
+  if [[ "${CONDA_DEFAULT_ENV}" == "base" ]] ; then
+    CONDA_ENV_VERSION=""
+  else
+    CONDA_ENV_VERSION="${BLUE}(${CONDA_DEFAULT_ENV})${COLOR_NONE} "
   fi
 }
 
@@ -118,8 +126,9 @@ function set_bash_prompt () {
   local EXIT_STATUS=$?
   set_prompt_symbol ${EXIT_STATUS}
 
-  # Set the PYTHON_VIRTUALENV variable.
-  type pyenv &>/dev/null && set_virtualenv
+  # Set the PYENV_VERSION variable.
+  test -z $(which pyenv) || set_pyenv_version
+  test -z ${CONDA_DEFAULT_ENV} || set_conda_version
 
   # Set the BRANCH variable.
   if is_git_repository ; then
@@ -136,7 +145,7 @@ function set_bash_prompt () {
   fi
 
   # Set the bash prompt variable.
-  PS1="${PYTHON_VIRTUALENV}${YELLOW}\u${COLOR_NONE}@${GREEN}${CHROOT_NAME}${COLOR_NONE}:${LIGHT_GRAY}\w ${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL}"
+  PS1="${CONDA_ENV_VERSION}${PYENV_VERSION}${YELLOW}\u${COLOR_NONE}@${GREEN}${CHROOT_NAME}${COLOR_NONE}:${LIGHT_GRAY}\w ${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL}"
 }
 
 # Tell bash to execute this function just before displaying its prompt.

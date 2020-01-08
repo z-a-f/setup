@@ -4,7 +4,7 @@ alias ...="cd..; cd .."
 
 set -o noclobber
 
-# Change the aliases:
+# System aliases
 alias abspath='which abspath || python -c "import os,sys; print os.path.abspath(sys.argv[1])"' # This is just a hack
 alias adbreset='adb kill-server && adb start-server'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -26,10 +26,12 @@ alias mv="mv -i"
 alias nano='nano -c'
 alias pig='pygmentize -g'
 alias rm='rm -vi'
-alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
+# alias todo='xargs -I{} git grep -nEIi "TODO\s*\({}\)" <<<'
+alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
 alias tw='open -a /Applications/TextWrangler.app'
 alias valgrind='valgrind --leak-check=full --tool=memcheck'
-alias todo='xargs -I{} git grep -EIi "TODO\({}\)" <<<'
 
+# Third-party stuff
 alias gclogin='gcloud auth application-default login'
+alias pykernel='xargs -I{} python -m ipykernel install --user --name {} --display-name "Python \({}\)" <<< '
 
