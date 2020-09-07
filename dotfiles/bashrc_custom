@@ -89,7 +89,7 @@ eval "$(pyenv virtualenv-init -)"
 #   #   export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 #   #   export VIRTUALENVWRAPPER_PYTHON="`pyenv which python`"
 #   #   if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-#   #   eval "$(pyenv virtualenv-init -)" 
+#   #   eval "$(pyenv virtualenv-init -)"
 #   # fi
 #   # source "`which virtualenvwrapper_lazy.sh`"
 # # fi
@@ -104,6 +104,9 @@ fi
 if [ -f ~/.bashrc_work_machine ]; then
   source ~/.bashrc_work_machine
 fi
+
+# Bash/Git completion
+[[ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && . "${BREW_PREFIX}/etc/profile.d/bash_completion.sh"
 
 # export C_INCLUDE_PATH=$(brew --prefix libomp)/include:$C_INCLUDE_PATH
 # export CPLUS_INCLUDE_PATH=$(brew --prefix libomp)/include:$CPLUS_INCLUDE_PATH

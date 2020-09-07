@@ -1,5 +1,7 @@
 [alias]
 	a = add .
+	aan = !git add . && git commit --amend --no-edit
+	aam = !git add . && git commit --amend
 	acm = !git add . && git commit -m
 	ai = add -i
 	#############
